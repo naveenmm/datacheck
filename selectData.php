@@ -11,7 +11,7 @@ echo "</table>";
         var sel = document.getElementsByName('selected');
         for (i = 0; i < sel.length; i++) {
             if (sel[i].checked) {
-                checkvalue = sel[i].value;
+                checkvalue = sel[i].value;                
                 check = 1;
             }
         }

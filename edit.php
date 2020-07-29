@@ -5,38 +5,150 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="register.css">
+    <script src="edit.js"></script>
 </head>
 
 <body>
     <?php
     echo $_POST['mail'];
     include_once "db.php";
-    $sql = "SELECT * FROM `internship_reg` WHERE email='" . $_POST['mail'] . "' LIMIT 1";
+    session_start();
+    $_SESSION["mail"] = $_POST['mail'];
+    $sql = "SELECT * FROM `" . $_SESSION["applied"] . "` WHERE email='" . $_POST['mail'] . "' LIMIT 1";
     $res = mysqli_query($conn, $sql);
-    while ($row = mysqli_fetch_assoc($res)) { ?>
-        <center>
-            <div class="headings">
-                <h1>SOTI Campus Recruitment 2021</h1>
-                <h3>Online Exam Registration Form</h3>
+    while ($row = mysqli_fetch_assoc($res)) {
+        $_SESSION['id']=$row['id'];
+        $name = $row['Full_Name'];
+        $email = $row['email'];
+        $phone = $row['phone'];
+        $collegeid = $row['collegeid'];
+        $address = $row['address'];
+        $hometown = $row['home_town'];
+        $graduation_course = $row['graduation_course'];
+        $graduation_branch = $row['graduation_branch'];
+        $graduation_college = $row['graduation_college'];
+        $graduation_year = $row['graduation_year'];
+        $post_graduation_course = $row['post_graduation_course'];
+        $post_graduation_branch = $row['post_graduation_branch'];
+        $post_graduation_college = $row['post_graduation_college'];
+        $post_graduation_year = $row['post_graduation_year'];
+    }
+    ?>
+    <center>
+        <div class="headings">
+            <h1>SOTI Campus Recruitment 2021</h1>
+            <h3>Online Exam Registration Form</h3>
+        </div>
+        <!--<form action="validate.php" method="post">-->
+        <div>
+            <label>Candidate Name (In Capitals)*</label><br><br>
+            <input type="text" id="name" readonly="true" value="<?php echo $name; ?>" name="name" required placeholder="Name" disabled>
+            <button id='name_enable' onclick="enable('name')">Edit</button>
+            <button id='name_disable' onclick="disable('name')" hidden>Confirm</button>
+        </div>
+        <div>
+            <label>Email *</label><br><br>
+            <input type="email" id="email" value="<?php echo $email; ?>" name="email" required placeholder="Email" disabled>
+            <button id='email_enable' onclick="enable('email')">Edit</button>
+            <button id='email_disable' onclick="disable('email')" hidden>Confirm</button>
+        </div>
+        <div>
+            <label>Phone number *</label><br><br>
+            <input type="text" id="phone" maxlength="10" value="<?php echo $phone; ?>" name="phone" required placeholder="Phone" disabled>
+            <button id='phone_enable' onclick="enable('phone')">Edit</button>
+            <button id='phone_disable' onclick="disable('phone')" hidden>Confirm</button>
+        </div>
+        <div>
+            <label>Address (In Capitals)*</label><br><br>
+            <input type="text" id="address" value="<?php echo $address ?>" multiple name="address" placeholder="Address" disabled>
+            <button id='address_enable' onclick="enable('address')">Edit</button>
+            <button id='address_disable' onclick="disable('address')" hidden>Confirm</button>
+        </div>
+        <div>
+            <label>Candidate Home Town *</label><br><br>
+            <input type="text" id="hometown" value="<?php echo $hometown ?>" name="hometown" disabled placeholder="Home Town">
+            <button id='hometown_enable' onclick="enable('hometown')">Edit</button>
+            <button id='hometown_disable' onclick="disable('hometown')" hidden>Confirm</button>
+        </div>
+        <!--Graduation Details-->
+        <?php
+        if ($_SESSION["applied"] != 'internship_reg') { ?>
+            <div>
+                <label>Course : Graduation *</label><br><br>
+                <select name="graduation" id="graduation" value="<?php echo $graduation_course ?>" disabled>
+                    <option value="B.Tech/BE">B.Tech/BE</option>
+                    <option value="BCA">BCA</option>
+                    <option value="BSc">BSc</option>
+                    <option value="Others">others</option>
+                </select>
+                <button id='graduation_enable' onclick="enable('graduation')">Edit</button>
+                <button id='graduation_disable' onclick="disable('graduation')" hidden>Confirm</button>
             </div>
-            <form action="sucess.php" method="post">
-                <div>
-                    <label>Candidate Name (In Capitals)*</label><br><br>
-                    <input type="text" id="name" value="<?php echo $row['Full_Name']; ?>" name="name" required placeholder="Name">
-                </div>
-                <div>
-                    <label>Email *</label><br><br>
-                    <input type="email" id="email" value="<?php echo $row['email']; ?>" name="email" required placeholder="Email">
-                </div>
-                <div>
-                    <label>Phone number *</label><br><br>
-                    <input type="text" id="phone" maxlength="10" value="<?php echo $row['phone']; ?>" name="phone" required placeholder="Phone">
-                </div>
-                <br><input type="submit" value="SUBMIT">
-            </form>
-        </center><?php
-                }
-                    ?>
+            <div>
+                <label>Graduation Branch *</label><br><br>
+                <select name="graduationbranch" id="graduationbranch" value="<?php echo $graduation_branch ?>" disabled>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Electronics and Communication">Electronics and Communication</option>
+                    <option value="Information Science">Information Science</option>
+                    <option value="Information Technology">Information Technology</option>
+                    <option value="Others">others</option>
+                </select>
+                <button id='graduationbranch_enable' onclick="enable('graduationbranch')">Edit</button>
+                <button id='graduationbranch_disable' onclick="disable('graduationbranch')" hidden>Confirm</button>
+            </div>
+            <div>
+                <label>Name of the College - Graduated *</label><br><br>
+                <input type="text" id="graduationCollege" name="graduationCollege" value="<?php echo $graduation_college ?>" disabled placeholder="Graduated College">
+                <button id='graduationCollege_enable' onclick="enable('graduationCollege')">Edit</button>
+                <button id='graduationCollege_disable' onclick="disable('graduationCollege')" hidden>Confirm</button>
+            </div>
+            <div>
+                <label>Year of Passing-Graduation *</label><br><br>
+                <input type="text" id="graduationPass" name="graduationPass" value="<?php echo $graduation_year ?>" disabled placeholder="Year of Passing">
+                <button id='graduationPass_enable' onclick="enable('graduationPass')">Edit</button>
+                <button id='graduationPass_disable' onclick="disable('graduationPass')" hidden>Confirm</button>
+            </div>
+        <?php } ?>
+        <div>
+            <label>Course : POST-Graduation *</label><br><br>
+            <select name="post_graduation" id="post_graduation" value="<?php echo $post_graduation_course ?>" disabled>
+                <option value="B.Tech/BE">B.Tech/BE</option>
+                <option value="BCA">BCA</option>
+                <option value="BSc">BSc</option>
+                <option value="Others">others</option>
+            </select>
+            <button id='post_graduation_enable' onclick="enable('post_graduation')">Edit</button>
+            <button id='post_graduation_disable' onclick="disable('post_graduation')" hidden>Confirm</button>
+        </div>
+        <div>
+            <label>POST-Graduation Branch *</label><br><br>
+            <select name="post_graduationbranch" id="post_graduationbranch" value="<?php echo $post_graduation_branch ?>" disabled>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Electronics and Communication">Electronics and Communication</option>
+                <option value="Information Science">Information Science</option>
+                <option value="Information Technology">Information Technology</option>
+                <option value="Others">others</option>
+            </select>
+            <button id='post_graduationbranch_enable' onclick="enable('post_graduationbranch')">Edit</button>
+            <button id='post_graduationbranch_disable' onclick="disable('post_graduationbranch')" hidden>Confirm</button>
+        </div>
+        <div>
+            <label>Name of the College - POST-Graduated *</label><br><br>
+            <input type="text" id="post_graduationCollege" name="post_graduationCollege" value="<?php echo $post_graduation_college ?>" disabled placeholder="POST Graduated College">
+            <button id='post_graduationCollege_enable' onclick="enable('post_graduationCollege')">Edit</button>
+            <button id='post_graduationCollege_disable' onclick="disable('post_graduationCollege')" hidden>Confirm</button>
+        </div>
+        <div>
+            <label>Year of Passing-POST-Graduation *</label><br><br>
+            <input type="text" id="post_graduationPass" name="post_graduationPass" value="<?php echo $post_graduation_year ?>" disabled placeholder="Year of Passing">
+            <button id='post_graduationPass_enable' onclick="enable('post_graduationPass')">Edit</button>
+            <button id='post_graduationPass_disable' onclick="disable('post_graduationPass')" hidden>Confirm</button>
+        </div>
+        <br><button value="CONFIRM" onclick="post_edited()">
+            <!-- </form> -->
+
+    </center>
+
 
 </body>
 

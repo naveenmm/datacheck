@@ -1,6 +1,7 @@
 <?php
 function printTable($conn,$sql){
     $res=mysqli_query($conn,$sql);
+    if(mysqli_num_rows($res)){
     if($res)
     {   
         //echo "<form action='selectData.php' method='post'>";
@@ -20,15 +21,22 @@ function printTable($conn,$sql){
     {
      echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
+    }
+    else{
+        echo 'No data found';
+    }
     //include_once "selectData.php";
     }
 
 if(isset($_POST['check']))
 {
-    $collegeid=$_POST['collegeid'];
+    //$collegeid=$_POST['collegeid'];
+    $collegeid="";
     $email=$_POST['email'];
     $phone=$_POST['phone'];
     $applied=$_POST['apply'];
+    session_start();
+    $_SESSION["applied"] = $applied;
     if($email==null and $phone==null and $collegeid!=null)
     {
         $sql="SELECT * FROM `".$applied."` WHERE collegeid='".$collegeid."'";

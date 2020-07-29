@@ -19,10 +19,10 @@
                 <label>Enter College id</label><br><br>
                 <input type="text" id="name" name="name" required placeholder="Name">
             </div>  -->
-            <div>
+            <!-- <div> 
                 <label>Validate</label><br><br>
                 <input type="text" name="collegeid" placeholder="College ID" value="">
-            </div>
+            </div>-->
             <div>
                 <label>Email</label><br><br>
                 <input type="email" id="email" name="email" placeholder="Email">
@@ -35,7 +35,7 @@
                 <label>Applied For</label><br><br>
                 <select name="apply" id="apply">
                     <option value="internship_reg">FULL TIME INTERNSHIP(6 Months)</option>
-                    <option value="full_time_reg">FULL TIME DEVELOPER</option>
+                    <option value="full_time_reg">FULL TIME DEVELOPER(Fresher Hiring)</option>
                 </select>
             </div>
 
