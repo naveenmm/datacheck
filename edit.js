@@ -39,3 +39,26 @@ function post_edited() {
     document.body.appendChild(form);
     form.submit();
 }
+
+function display_details(){
+    //document.getElementById('details_confirm').innerHTML="email:"+document.getElementById('email').value;
+    if(!document.getElementById('graduationCollege'))
+    {
+        var grad="nil";
+    }
+    else{
+        var grad=document.getElementById('graduationCollege').value;
+    }
+    if(!document.getElementById('post_graduationCollege'))
+    {
+        var postgrad="nil";
+    }
+    else{
+        var postgrad=document.getElementById('post_graduationCollege').value;
+    }
+    var details="Name:"+document.getElementById('name').value+"\nCollegeid:"+document.getElementById('collegeid').value+"\nEmail:"+document.getElementById('email').value+"\nPhone:"+document.getElementById('phone').value+"\nGraduation College:"+grad+"\nPOST-Graduation College:"+postgrad;
+    document.createTextNode(details);
+    //document.getElementById('details_confirm').appendChild(document.createTextNode("Name:"+document.getElementById('name').value));
+    //document.getElementById('details_confirm').appendChild(document.createTextNode("\nCollegeid:"+document.getElementById('collegeid').value));
+    //document.getElementById('details_confirm').innerHTML(details);
+}

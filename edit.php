@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Document</title>    
+    <script src="edit.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="register.css">
     <script src="edit.js"></script>
 </head>
@@ -100,10 +104,16 @@
             <button id='phone_disable' onclick="disable('phone')" hidden>Confirm</button>
         </div>
         <div>
+            <label>College id *</label><br><br>
+            <input type="text" id="collegeid" readonly="true" value="<?php echo $collegeid; ?>" name="collegeid" required placeholder="Name" disabled>
+            <button id='name_enable' onclick="enable('collegeid')">Edit</button>
+            <button id='name_disable' onclick="disable('collegeid')" hidden>Confirm</button>
+        </div>
+        <div>
             <label>Address (In Capitals)*</label><br><br>
             <input type="text" id="address" value="<?php echo $address ?>" multiple name="address" placeholder="Address" disabled>
-            <button id='address_enable' onclick="enable('address')">Edit</button>
-            <button id='address_disable' onclick="disable('address')" hidden>Confirm</button>
+            <!-- <button id='address_enable' onclick="enable('address')">Edit</button>
+            <button id='address_disable' onclick="disable('address')" hidden>Confirm</button> -->
         </div>
         <div>
             <label>Candidate Home Town *</label><br><br>
@@ -122,8 +132,8 @@
                     <option value="BSc">BSc</option>
                     <option value="Others">others</option>
                 </select>
-                <button id='graduation_enable' onclick="enable('graduation')">Edit</button>
-                <button id='graduation_disable' onclick="disable('graduation')" hidden>Confirm</button>
+                <!-- <button id='graduation_enable' onclick="enable('graduation')">Edit</button>
+                <button id='graduation_disable' onclick="disable('graduation')" hidden>Confirm</button> -->
             </div>
             <div>
                 <label>Graduation Branch *</label><br><br>
@@ -134,20 +144,20 @@
                     <option value="Information Technology">Information Technology</option>
                     <option value="Others">others</option>
                 </select>
-                <button id='graduationbranch_enable' onclick="enable('graduationbranch')">Edit</button>
-                <button id='graduationbranch_disable' onclick="disable('graduationbranch')" hidden>Confirm</button>
+                <!-- <button id='graduationbranch_enable' onclick="enable('graduationbranch')">Edit</button>
+                <button id='graduationbranch_disable' onclick="disable('graduationbranch')" hidden>Confirm</button> -->
             </div>
             <div>
                 <label>Name of the College - Graduated *</label><br><br>
                 <input type="text" id="graduationCollege" name="graduationCollege" value="<?php echo $graduation_college ?>" disabled placeholder="Graduated College">
-                <button id='graduationCollege_enable' onclick="enable('graduationCollege')">Edit</button>
-                <button id='graduationCollege_disable' onclick="disable('graduationCollege')" hidden>Confirm</button>
+                <!-- <button id='graduationCollege_enable' onclick="enable('graduationCollege')">Edit</button>
+                <button id='graduationCollege_disable' onclick="disable('graduationCollege')" hidden>Confirm</button> -->
             </div>
             <div>
                 <label>Year of Passing-Graduation *</label><br><br>
                 <input type="text" id="graduationPass" name="graduationPass" value="<?php echo $graduation_year ?>" disabled placeholder="Year of Passing">
-                <button id='graduationPass_enable' onclick="enable('graduationPass')">Edit</button>
-                <button id='graduationPass_disable' onclick="disable('graduationPass')" hidden>Confirm</button>
+                <!-- <button id='graduationPass_enable' onclick="enable('graduationPass')">Edit</button>
+                <button id='graduationPass_disable' onclick="disable('graduationPass')" hidden>Confirm</button> -->
             </div>
         <?php } ?>
         <div>
@@ -158,8 +168,8 @@
                 <option value="BSc">BSc</option>
                 <option value="Others">others</option>
             </select>
-            <button id='post_graduation_enable' onclick="enable('post_graduation')">Edit</button>
-            <button id='post_graduation_disable' onclick="disable('post_graduation')" hidden>Confirm</button>
+            <!-- <button id='post_graduation_enable' onclick="enable('post_graduation')">Edit</button>
+            <button id='post_graduation_disable' onclick="disable('post_graduation')" hidden>Confirm</button> -->
         </div>
         <div>
             <label>POST-Graduation Branch *</label><br><br>
@@ -170,27 +180,64 @@
                 <option value="Information Technology">Information Technology</option>
                 <option value="Others">others</option>
             </select>
-            <button id='post_graduationbranch_enable' onclick="enable('post_graduationbranch')">Edit</button>
-            <button id='post_graduationbranch_disable' onclick="disable('post_graduationbranch')" hidden>Confirm</button>
+            <!-- <button id='post_graduationbranch_enable' onclick="enable('post_graduationbranch')">Edit</button>
+            <button id='post_graduationbranch_disable' onclick="disable('post_graduationbranch')" hidden>Confirm</button> -->
         </div>
         <div>
             <label>Name of the College - POST-Graduated *</label><br><br>
             <input type="text" id="post_graduationCollege" name="post_graduationCollege" value="<?php echo $post_graduation_college ?>" disabled placeholder="POST Graduated College">
-            <button id='post_graduationCollege_enable' onclick="enable('post_graduationCollege')">Edit</button>
-            <button id='post_graduationCollege_disable' onclick="disable('post_graduationCollege')" hidden>Confirm</button>
+            <!-- <button id='post_graduationCollege_enable' onclick="enable('post_graduationCollege')">Edit</button>
+            <button id='post_graduationCollege_disable' onclick="disable('post_graduationCollege')" hidden>Confirm</button> -->
         </div>
         <div>
             <label>Year of Passing-POST-Graduation *</label><br><br>
             <input type="text" id="post_graduationPass" name="post_graduationPass" value="<?php echo $post_graduation_year ?>" disabled placeholder="Year of Passing">
-            <button id='post_graduationPass_enable' onclick="enable('post_graduationPass')">Edit</button>
-            <button id='post_graduationPass_disable' onclick="disable('post_graduationPass')" hidden>Confirm</button>
+            <!-- <button id='post_graduationPass_enable' onclick="enable('post_graduationPass')">Edit</button>
+            <button id='post_graduationPass_disable' onclick="disable('post_graduationPass')" hidden>Confirm</button> -->
         </div>
-        <br><button value="CONFIRM" onclick="post_edited()">CONFIRM</button>
+        <br><button value="CONFIRM" data-toggle="modal" data-target="#myModal" onclick="display_details()">CONFIRM</button>
             <!-- </form> -->
 
+        <!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">        
+        <h4 class="modal-title">Check Details</h4>
+      </div>
+      <div id='details_confirm' class="modal-body">
+          <script>
+              if(!document.getElementById('graduationCollege'))
+    {
+        var grad="nil";
+    }
+    else{
+        var grad=document.getElementById('graduationCollege').value;
+    }
+    if(!document.getElementById('post_graduationCollege'))
+    {
+        var postgrad="nil";
+    }
+    else{
+        var postgrad=document.getElementById('post_graduationCollege').value;
+    }
+    var details="Name:"+document.getElementById('name').value+"\nCollegeid:"+document.getElementById('collegeid').value+"\nEmail:"+document.getElementById('email').value+"\nPhone:"+document.getElementById('phone').value+"\nGraduation College:"+grad+"\nPOST-Graduation College:"+postgrad;
+    document.createTextNode(details)
+    document.getElementById('details_confirm').appendChild(document.createTextNode(details));
+          </script>
+      </div>
+      <div>
+        <button type="button" onclick="post_edited()">CONFIRM</button>
+        <button type="button" data-dismiss="modal">CANCEL</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+        
     </center>
-
-
 </body>
 
 </html>
