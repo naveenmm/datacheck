@@ -15,19 +15,14 @@ else{
 }
 $sql_verify="INSERT INTO `".$verify_table."`(`id`) VALUES (".$_SESSION['id'].")";
 $res=mysqli_query($conn,$sql);
-if($res){
-    //();
-    echo "Data Updated";
-}
-else{
-
-}
 $verify=mysqli_query($conn,$sql_verify);
-if($verify){
-    session_unset();
-    echo "and verified";
+if($res and $verify){
+    //();
+    sleep(3);
+    header('Location:validate.php?sucess=Data Updated and verified');
 }
 else{
 
 }
+
 ?>

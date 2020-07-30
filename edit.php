@@ -10,12 +10,40 @@
 
 <body>
     <?php
-    echo $_POST['mail'];
+    if(isset($_POST['check']))
+    {
+        $collegeid="";
+        $email=$_POST['email'];
+        $phone=$_POST['phone'];
+        $applied=$_POST['apply'];
+        session_start();
+        $_SESSION["applied"] = $applied;
+        $_SESSION["mail"] = $_POST['email'];
+    }
+    echo $_POST['email'];
     include_once "db.php";
-    session_start();
-    $_SESSION["mail"] = $_POST['mail'];
-    $sql = "SELECT * FROM `" . $_SESSION["applied"] . "` WHERE email='" . $_POST['mail'] . "' LIMIT 1";
+    if($email!=null and $phone!=null)
+    {
+        $sql="SELECT * FROM `".$applied."` WHERE email='".$email."' UNION ALL SELECT * FROM `".$applied."` WHERE phone='".$phone."'";
+    }
+    elseif($email==null and $phone!=null)
+    {
+        $sql="SELECT * FROM `".$applied."` WHERE phone='".$phone."'";        
+    }
+    elseif($email!=null and $phone==null)
+    {
+        $sql="SELECT * FROM `".$applied."` WHERE email='".$email."'";        
+    }
+    elseif($email==null and $phone==null){
+        $sql='';
+        header('Location:validate.php?error=Enter any data');
+    }
+    //$sql = "SELECT * FROM `" . $_SESSION["applied"] . "` WHERE email='" . $_POST['email'] . "' LIMIT 1";
     $res = mysqli_query($conn, $sql);
+    if(mysqli_num_rows($res)<1){
+        header('Location:validate.php?error=No data found');
+    }
+    echo $sql;
     while ($row = mysqli_fetch_assoc($res)) {
         $_SESSION['id']=$row['id'];
         $name = $row['Full_Name'];
@@ -32,6 +60,19 @@
         $post_graduation_branch = $row['post_graduation_branch'];
         $post_graduation_college = $row['post_graduation_college'];
         $post_graduation_year = $row['post_graduation_year'];
+        if($_SESSION['applied']=='internship_reg')
+        {
+            $verify_table="verified_interns";
+        }
+        elseif($_SESSION['applied']=='full_time_reg')
+        {
+            $verify_table="verified_full_time";
+        }
+        $verify_sql="SELECT * FROM `".$verify_table."` WHERE id='".$_SESSION['id']."'";
+        if(mysqli_num_rows(mysqli_query($conn,$verify_sql))>0)
+        {
+            header('Location:validate.php?error=You have already Verified data. Contact admin for details');
+        }
     }
     ?>
     <center>
@@ -144,7 +185,7 @@
             <button id='post_graduationPass_enable' onclick="enable('post_graduationPass')">Edit</button>
             <button id='post_graduationPass_disable' onclick="disable('post_graduationPass')" hidden>Confirm</button>
         </div>
-        <br><button value="CONFIRM" onclick="post_edited()">
+        <br><button value="CONFIRM" onclick="post_edited()">CONFIRM</button>
             <!-- </form> -->
 
     </center>

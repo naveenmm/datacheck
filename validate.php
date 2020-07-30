@@ -14,7 +14,7 @@
             <h1>SOTI Campus Recruitment 2021</h1>
             <h3>Online Exam Registration Form</h3>
         </div>
-        <form method="post">
+        <form action="edit.php" method="post">
             <!--<div>
                 <label>Enter College id</label><br><br>
                 <input type="text" id="name" name="name" required placeholder="Name">
@@ -41,7 +41,16 @@
 
             <br><input type="submit" name="check" value="SUBMIT">
         </form>
-        <?php include_once "datacheck.php"; ?>
+        <?php include_once "datacheck.php"; 
+            if(isset($_GET['error']))
+            {
+                echo $_GET['error'];
+            }
+            if(isset($_GET['sucess']))
+            {
+                echo $_GET['sucess'];
+            }
+        ?>
     </center>
 </body>
 

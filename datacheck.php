@@ -1,32 +1,32 @@
 <?php
-function printTable($conn,$sql){
-    $res=mysqli_query($conn,$sql);
-    if(mysqli_num_rows($res)){
-    if($res)
-    {   
-        //echo "<form action='selectData.php' method='post'>";
-        echo "<table>
-        <tr>
-        <th>Select</th>
-        <th>Name</th>
-        <th>email</th>
-        <th>phone</th>
-        <th>Graduation</th>
-        <th>PG</th>
-        </tr>";
-        include_once "selectData.php";       
-            //echo "</form>";
-    }
-    else 
-    {
-     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    }
-    }
-    else{
-        echo 'No data found';
-    }
-    //include_once "selectData.php";
-    }
+// function printTable($conn,$sql){
+//     $res=mysqli_query($conn,$sql);
+//     if(mysqli_num_rows($res)){
+//     if($res)
+//     {   
+//         //echo "<form action='selectData.php' method='post'>";
+//         echo "<table>
+//         <tr>
+//         <th>Select</th>
+//         <th>Name</th>
+//         <th>email</th>
+//         <th>phone</th>
+//         <th>Graduation</th>
+//         <th>PG</th>
+//         </tr>";
+//         include_once "selectData.php";       
+//             //echo "</form>";
+//     }
+//     else 
+//     {
+//      echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+//     }
+//     }
+//     else{
+//         echo 'No data found';
+//     }
+//     //include_once "selectData.php";
+//     }
 
 if(isset($_POST['check']))
 {
@@ -40,32 +40,32 @@ if(isset($_POST['check']))
     if($email==null and $phone==null and $collegeid!=null)
     {
         $sql="SELECT * FROM `".$applied."` WHERE collegeid='".$collegeid."'";
-        printTable($conn,$sql);
+        //printTable($conn,$sql);
     }
     elseif($email==null and $phone!=null and $collegeid==null)
     {
         $sql="SELECT * FROM `".$applied."` WHERE phone='".$phone."'";
-        printTable($conn,$sql);
+        //printTable($conn,$sql);
     }
     elseif($email!=null and $phone==null and $collegeid==null)
     {
         $sql="SELECT * FROM `".$applied."` WHERE email='".$email."'";
-        printTable($conn,$sql);
+        //printTable($conn,$sql);
     }
     elseif($email!=null and $phone!=null and $collegeid==null) 
     {
         $sql="SELECT * FROM `".$applied."` WHERE email='".$email."' UNION ALL SELECT * FROM `".$applied."` WHERE phone='".$phone."'";
-        printTable($conn,$sql);
+        //printTable($conn,$sql);
     }
     elseif($email!=null and $phone==null and $collegeid!=null) 
     {
         $sql="SELECT * FROM `".$applied."` WHERE email='".$email."' UNION ALL SELECT * FROM `".$applied."` WHERE collegeid='".$collegeid."'";
-        printTable($conn,$sql);
+        //printTable($conn,$sql);
     }
     elseif($email==null and $phone!=null and $collegeid!=null) 
     {
         $sql="SELECT * FROM `".$applied."` WHERE collegeid='".$collegeid."' UNION ALL SELECT * FROM `".$applied."` WHERE phone='".$phone."'";
-        printTable($conn,$sql);
+        //printTable($conn,$sql);
     }
     elseif($email==null and $phone==null and $collegeid==null)
     {
@@ -73,6 +73,6 @@ if(isset($_POST['check']))
     }
     else{
         $sql="SELECT * FROM `".$applied."` WHERE collegeid='".$collegeid."' UNION ALL SELECT * FROM `".$applied."` WHERE email='".$email."' UNION ALL SELECT * FROM `".$applied."` WHERE phone=".$phone;
-        printTable($conn,$sql);
+        //printTable($conn,$sql);
     }    
 }
