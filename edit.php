@@ -23,12 +23,40 @@
         session_start();
         $_SESSION["applied"] = $applied;
         $_SESSION["mail"] = $_POST['email'];
+        $_SESSION["phone"]=$_POST['phone'];
     }
     echo $_POST['email'];
     include_once "db.php";
     if($email!=null and $phone!=null)
     {
-        $sql="SELECT * FROM `".$applied."` WHERE email='".$email."' UNION ALL SELECT * FROM `".$applied."` WHERE phone='".$phone."'";
+        //$sql="SELECT * FROM `".$applied."` WHERE email='".$email."' UNION ALL SELECT * FROM `".$applied."` WHERE phone='".$phone."'";
+        $sql="SELECT * FROM `".$applied."` WHERE email='".$email."' and phone='".$phone."'";
+        echo $sql;
+        if(mysqli_num_rows(mysqli_query($conn, $sql))<1)
+        {
+            $sqlemail="SELECT * FROM `".$applied."` WHERE email='".$email."'";
+            $sqlphone="SELECT * FROM `".$applied."` WHERE phone='".$phone."'";
+            if(mysqli_num_rows(mysqli_query($conn, $sqlemail))<mysqli_num_rows(mysqli_query($conn, $sqlphone))){
+                $sql=$sqlphone;
+                $_SESSION["phoneedit"]=false;
+                $_SESSION["mailedit"] =true;
+            }
+            elseif(mysqli_num_rows(mysqli_query($conn, $sqlphone))<mysqli_num_rows(mysqli_query($conn, $sqlemail))){
+                $sql=$sqlemail;
+                $_SESSION["mailedit"] =false;
+                $_SESSION["phoneedit"]=true;
+            }
+            elseif(mysqli_num_rows(mysqli_query($conn, $sqlphone))==mysqli_num_rows(mysqli_query($conn, $sqlemail)))
+            {
+                $sql=$sqlemail;
+                $_SESSION["mailedit"] =false;
+                $_SESSION["phoneedit"]=true;
+            }
+        }
+        else{
+            $_SESSION["mailedit"] =false;
+            $_SESSION["phoneedit"]=false;
+        }
     }
     elseif($email==null and $phone!=null)
     {
@@ -94,20 +122,24 @@
         <div>
             <label>Email *</label><br><br>
             <input type="email" id="email" value="<?php echo $email; ?>" name="email" required placeholder="Email" disabled>
+            <?php if($_SESSION["mailedit"] == true){?>
             <button id='email_enable' onclick="enable('email')">Edit</button>
             <button id='email_disable' onclick="disable('email')" hidden>Confirm</button>
+            <?php }?>
         </div>
         <div>
             <label>Phone number *</label><br><br>
             <input type="text" id="phone" maxlength="10" value="<?php echo $phone; ?>" name="phone" required placeholder="Phone" disabled>
+            <?php if($_SESSION["phoneedit"] == true){?>
             <button id='phone_enable' onclick="enable('phone')">Edit</button>
             <button id='phone_disable' onclick="disable('phone')" hidden>Confirm</button>
+            <?php }?>
         </div>
         <div>
             <label>College id *</label><br><br>
             <input type="text" id="collegeid" readonly="true" value="<?php echo $collegeid; ?>" name="collegeid" required placeholder="Name" disabled>
-            <button id='name_enable' onclick="enable('collegeid')">Edit</button>
-            <button id='name_disable' onclick="disable('collegeid')" hidden>Confirm</button>
+            <button id='collegeid_enable' onclick="enable('collegeid')">Edit</button>
+            <button id='collegeid_disable' onclick="disable('collegeid')" hidden>Confirm</button>
         </div>
         <div>
             <label>Address (In Capitals)*</label><br><br>
@@ -195,7 +227,7 @@
             <!-- <button id='post_graduationPass_enable' onclick="enable('post_graduationPass')">Edit</button>
             <button id='post_graduationPass_disable' onclick="disable('post_graduationPass')" hidden>Confirm</button> -->
         </div>
-        <br><button value="CONFIRM" data-toggle="modal" data-target="#myModal" onclick="display_details()">CONFIRM</button>
+        <br><button value="CONFIRM" data-toggle="modal" data-target="#myModal" onclick="display_details()">CONFIRM</button><br><br>
             <!-- </form> -->
 
         <!-- Modal -->

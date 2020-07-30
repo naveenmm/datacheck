@@ -27,7 +27,13 @@ function post_edited() {
     phone.value = document.getElementById('phone').value;
     graduation_college.type = 'hidden';
     graduation_college.name = 'graduationCollege';
-    graduation_college.value = document.getElementById('graduationCollege').value;
+    if(document.getElementById('graduationCollege')){
+        graduation_college.value = document.getElementById('graduationCollege').value;
+    }
+    else{
+        graduation_college.value="";
+    }
+
     post_graduation_college.type = 'hidden';
     post_graduation_college.name = 'post_graduationCollege';
     post_graduation_college.value = document.getElementById('post_graduationCollege').value;

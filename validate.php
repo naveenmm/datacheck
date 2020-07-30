@@ -14,6 +14,16 @@
             <h1>SOTI Campus Recruitment 2021</h1>
             <h3>Online Exam Registration Form</h3>
         </div>
+        <?php
+            if(isset($_GET['error']))
+            {
+                echo "<script>alert('".$_GET['error']."')</script>";
+            }
+            if(isset($_GET['sucess']))
+            {
+                echo "<script>alert('".$_GET['sucess']."')</script>";
+            }
+        ?>
         <form action="edit.php" method="post">
             <!--<div>
                 <label>Enter College id</label><br><br>
@@ -40,17 +50,8 @@
             </div>
 
             <br><input type="submit" name="check" value="SUBMIT">
-        </form>
-        <?php include_once "datacheck.php"; 
-            if(isset($_GET['error']))
-            {
-                echo $_GET['error'];
-            }
-            if(isset($_GET['sucess']))
-            {
-                echo $_GET['sucess'];
-            }
-        ?>
+        </form><br>
+        <a href="index.php">Create New only if no data found</a>        
     </center>
 </body>
 
