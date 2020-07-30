@@ -4,8 +4,10 @@ $phone=$_POST['phone'];
 $mail=$_POST['mail'];
 $graduationCollege=$_POST['graduationCollege'];
 $post_graduationCollege=$_POST['post_graduationCollege'];
+$name=$_POST['name'];
+$collegeid=$_POST['collegeid'];
 
-$sql="UPDATE `".$_SESSION["applied"]."` SET `email`='".$mail."', `phone`='".$phone."', `graduation_college`='".$graduationCollege."', `post_graduation_college`='".$post_graduationCollege."' WHERE `email`='".$_SESSION["mail"]."'";
+$sql="UPDATE `".$_SESSION["applied"]."` SET `email`='".$mail."', `phone`='".$phone."', `graduation_college`='".$graduationCollege."', `post_graduation_college`='".$post_graduationCollege."',`collegeid`= '".$collegeid."',`Full_Name`='".$name."' WHERE `email`='".$_SESSION["mail"]."'";
 if($_SESSION["applied"]=='full_time_reg')
 {
     $verify_table='verified_full_time';
@@ -24,5 +26,3 @@ if($res and $verify){
 else{
 
 }
-
-?>

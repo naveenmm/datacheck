@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SOTI Registration</title>
     <link rel="stylesheet" type="text/css" href="register.css">
 </head>
 
@@ -15,14 +15,12 @@
             <h3>Online Exam Registration Form</h3>
         </div>
         <?php
-            if(isset($_GET['error']))
-            {
-                echo "<script>alert('".$_GET['error']."')</script>";
-            }
-            if(isset($_GET['sucess']))
-            {
-                echo "<script>alert('".$_GET['sucess']."')</script>";
-            }
+        if (isset($_GET['error'])) {
+            echo "<script>alert('" . $_GET['error'] . "')</script>";
+        }
+        if (isset($_GET['sucess'])) {
+            echo "<script>alert('" . $_GET['sucess'] . "')</script>";
+        }
         ?>
         <form action="edit.php" method="post">
             <!--<div>
@@ -51,7 +49,7 @@
 
             <br><input type="submit" name="check" value="SUBMIT">
         </form><br>
-        <a href="index.php">Create New only if no data found</a>        
+        <a href="index.php">Create New only if no data found</a>
     </center>
 </body>
 
