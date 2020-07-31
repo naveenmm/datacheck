@@ -1,4 +1,4 @@
 <?php $username='soti';
         $password='3jN@KG3uu@hSKXS';
-        $db='master_data';
+        $db='candidate_list';
         $conn=mysqli_connect('localhost',$username,$password,$db);
