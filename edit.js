@@ -17,8 +17,8 @@ function post_edited() {
     form.action = 'update.php';
     var mail = document.createElement('input');
     var phone = document.createElement('input');
-    var graduation_college = document.createElement('input');
-    var post_graduation_college = document.createElement('input');
+    var college = document.createElement('input');
+
     var name = document.createElement('input');
     var collegeid = document.createElement('input');
     name.type = 'hidden';
@@ -33,44 +33,18 @@ function post_edited() {
     phone.type = 'hidden';
     phone.name = 'phone';
     phone.value = document.getElementById('phone').value;
-    graduation_college.type = 'hidden';
-    graduation_college.name = 'graduationCollege';
-    if (document.getElementById('graduationCollege')) {
-        graduation_college.value = document.getElementById('graduationCollege').value;
+    college.type = 'hidden';
+    college.name = 'college';
+    college.value = document.getElementById('college').value;
+    /*if (document.getElementById('college')) {
+        college.value = document.getElementById('college').value;
     }
     else {
-        graduation_college.value = "";
-    }
-
-    post_graduation_college.type = 'hidden';
-    post_graduation_college.name = 'post_graduationCollege';
-    post_graduation_college.value = document.getElementById('post_graduationCollege').value;
-
+        college.value = "";
+    }*/
     form.appendChild(mail);
     form.appendChild(phone)
-    form.appendChild(graduation_college)
-    form.appendChild(post_graduation_college)
+    form.appendChild(college)
     document.body.appendChild(form);
     form.submit();
-}
-
-function display_details() {
-    //document.getElementById('details_confirm').innerHTML="email:"+document.getElementById('email').value;
-    if (!document.getElementById('graduationCollege')) {
-        var grad = "nil";
-    }
-    else {
-        var grad = document.getElementById('graduationCollege').value;
-    }
-    if (!document.getElementById('post_graduationCollege')) {
-        var postgrad = "nil";
-    }
-    else {
-        var postgrad = document.getElementById('post_graduationCollege').value;
-    }
-    var details = "Name:" + document.getElementById('name').value + "\nCollegeid:" + document.getElementById('collegeid').value + "\nEmail:" + document.getElementById('email').value + "\nPhone:" + document.getElementById('phone').value + "\nGraduation College:" + grad + "\nPOST-Graduation College:" + postgrad;
-    document.createTextNode(details);
-    //document.getElementById('details_confirm').appendChild(document.createTextNode("Name:"+document.getElementById('name').value));
-    //document.getElementById('details_confirm').appendChild(document.createTextNode("\nCollegeid:"+document.getElementById('collegeid').value));
-    //document.getElementById('details_confirm').innerHTML(details);
 }

@@ -72,14 +72,10 @@
         $collegeid = $row['collegeid'];
         $address = $row['address'];
         $hometown = $row['home_town'];
-        $graduation_course = $row['graduation_course'];
-        $graduation_branch = $row['graduation_branch'];
-        $graduation_college = $row['graduation_college'];
-        $graduation_year = $row['graduation_year'];
-        $post_graduation_course = $row['post_graduation_course'];
-        $post_graduation_branch = $row['post_graduation_branch'];
-        $post_graduation_college = $row['post_graduation_college'];
-        $post_graduation_year = $row['post_graduation_year'];
+        $course = $row['course'];
+        $branch = $row['branch'];
+        $college = $row['college'];
+        $year = $row['year_of_passing'];
         if ($_SESSION['applied'] == 'internship_reg') {
             $verify_table = "verified_interns";
         } elseif ($_SESSION['applied'] == 'full_time_reg') {
@@ -135,42 +131,26 @@
             <button id='hometown_disable' onclick="disable('hometown')" hidden>Confirm</button>
         </div>
         <!--Graduation Details-->
-        <?php
-        if ($_SESSION["applied"] != 'internship_reg') { ?>
-            <div>
-                <label>Course : Graduation *</label><br><br>
-                <input type="text" id="graduation" name="graduation" value="<?php echo $graduation_course ?>" disabled placeholder="Graduated Course">
-            </div>
-            <div>
-                <label>Graduation Branch *</label><br><br>
-                <input type="text" id="graduationbranch" name="graduationbranch" value="<?php echo $graduation_branch ?>" disabled placeholder="Graduated Branch">
-            </div>
-            <div>
-                <label>Name of the College - Graduated *</label><br><br>
-                <input type="text" id="graduationCollege" name="graduationCollege" value="<?php echo $graduation_college ?>" disabled placeholder="Graduated College">
-            </div>
-            <div>
-                <label>Year of Passing-Graduation *</label><br><br>
-                <input type="text" id="graduationPass" name="graduationPass" value="<?php echo $graduation_year ?>" disabled placeholder="Year of Passing">
-            </div>
-        <?php } ?>
+
         <div>
-            <label>Course : POST-Graduation *</label><br><br>
-            <input type="text" id="post_graduation" name="post_graduation" value="<?php echo $post_graduation_course ?>" disabled placeholder="POST Graduation Course">
+            <label>Course *</label><br><br>
+            <input type="text" id="course" name="course" value="<?php echo $course ?>" disabled placeholder="Course">
         </div>
         <div>
-            <label>POST-Graduation Branch *</label><br><br>
-            <input type="text" id="post_graduationbranch" name="post_graduationbranch" value="<?php echo $post_graduation_branch ?>" disabled placeholder="POST Graduated Branch">
+            <label>Branch *</label><br><br>
+            <input type="text" id="branch" name="branch" value="<?php echo $branch ?>" disabled placeholder="Branch">
         </div>
         <div>
-            <label>Name of the College - POST-Graduated *</label><br><br>
-            <input type="text" id="post_graduationCollege" name="post_graduationCollege" value="<?php echo $post_graduation_college ?>" disabled placeholder="POST Graduated College">
+            <label>Name of the College *</label><br><br>
+            <input type="text" id="college" name="college" value="<?php echo $college ?>" disabled placeholder="College">
+            <button id='college_enable' onclick="enable('college')">Edit</button>
+            <button id='college_disable' onclick="disable('college')" hidden>Confirm</button>
         </div>
         <div>
-            <label>Year of Passing-POST-Graduation *</label><br><br>
-            <input type="text" id="post_graduationPass" name="post_graduationPass" value="<?php echo $post_graduation_year ?>" disabled placeholder="Year of Passing">
+            <label>Year of Passing *</label><br><br>
+            <input type="text" id="year" name="year" value="<?php echo $year ?>" disabled placeholder="Year of Passing">
         </div>
-        <br><button value="CONFIRM" data-toggle="modal" data-target="#myModal" onclick="display_details()">CONFIRM</button><br><br>
+        <br><button value="CONFIRM" data-toggle="modal" data-target="#myModal">CONFIRM</button><br><br>
 
         <div id="myModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -180,17 +160,13 @@
                     </div>
                     <div id='details_confirm' class="modal-body">
                         <script>
-                            if (!document.getElementById('graduationCollege')) {
-                                var grad = "nil";
+                            if (!document.getElementById('college')) {
+                                var college = "nil";
                             } else {
-                                var grad = document.getElementById('graduationCollege').value;
+                                var college = document.getElementById('college').value;
                             }
-                            if (!document.getElementById('post_graduationCollege')) {
-                                var postgrad = "nil";
-                            } else {
-                                var postgrad = document.getElementById('post_graduationCollege').value;
-                            }
-                            var details = "Name:" + document.getElementById('name').value + "\nCollegeid:" + document.getElementById('collegeid').value + "\nEmail:" + document.getElementById('email').value + "\nPhone:" + document.getElementById('phone').value + "\nGraduation College:" + grad + "\nPOST-Graduation College:" + postgrad;
+
+                            var details = "Name:" + document.getElementById('name').value + "\nCollegeid:" + document.getElementById('collegeid').value + "\nEmail:" + document.getElementById('email').value + "\nPhone:" + document.getElementById('phone').value + "\College:" + college;
                             document.createTextNode(details)
                             document.getElementById('details_confirm').appendChild(document.createTextNode(details));
                         </script>
