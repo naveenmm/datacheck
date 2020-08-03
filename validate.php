@@ -21,7 +21,7 @@
             session_unset();
         }
         ?>
-        <form action="editchecker.php" method="post">
+        <form action="edit.php" method="post">
             <!--<div>
                 <label>Enter College id</label><br><br>
                 <input type="text" id="name" name="name" required placeholder="Name">

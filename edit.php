@@ -93,6 +93,7 @@
             <h3>Online Exam Registration Form</h3>
         </div>
         <div class="centerdiv">
+            <form method="post" id="editform">
         <div>
             <label>Candidate Name (In Capitals)*</label><br><br>
             <input type="text" id="name" value="<?php echo $name; ?>" name="name" required placeholder="Name">
@@ -105,21 +106,21 @@
         </div>
         <div>
             <label>Phone number *</label><br><br>
-            <input type="text" id="phone" minlength="10" maxlength="10" pattern="[0-9]{10}" value="<?php echo $phone; ?>" name="phone" required placeholder="Phone" <?php if ($_SESSION["phoneedit"] == false){echo "disabled";}?>>
+            <input type="text" id="phone" maxlength="10" minlength="10" pattern="[0-9]{10}" value="<?php echo $phone; ?>" name="phone" required placeholder="Phone" <?php if ($_SESSION["phoneedit"] == false){echo "disabled";}?>>
         </div>
         <div>
             <label>College id *</label><br><br>
-            <input type="text" id="collegeid" readonly="true" value="<?php echo $collegeid; ?>" name="collegeid" required placeholder="Name">
+            <input type="text" id="collegeid" value="<?php echo $collegeid; ?>" name="collegeid" required placeholder="Name">
             <!-- <button id='collegeid_enable' onclick="enable('collegeid')">Edit</button>
             <button id='collegeid_disable' onclick="disable('collegeid')" hidden>Confirm</button> -->
         </div>
         <div>
             <label>Address (In Capitals)*</label><br><br>
-            <input type="text" id="address" value="<?php echo $address ?>" multiple name="address" placeholder="Address">
+            <input type="text" id="address" value="<?php echo $address ?>" multiple name="address" placeholder="Address" required>
         </div>
         <div>
             <label>Candidate Home Town *</label><br><br>
-            <input type="text" id="hometown" value="<?php echo $hometown ?>" name="hometown" placeholder="Home Town">
+            <input type="text" id="hometown" value="<?php echo $hometown ?>" name="hometown" placeholder="Home Town" required>
             <!-- <button id='hometown_enable' onclick="enable('hometown')">Edit</button>
             <button id='hometown_disable' onclick="disable('hometown')" hidden>Confirm</button> -->
         </div>
@@ -134,7 +135,7 @@
         </div>
         <div>
             <label>Name of the College *</label><br><br>
-            <input type="text" id="college" name="college" value="<?php echo $college ?>" placeholder="College">
+            <input type="text" id="college" name="college" value="<?php echo $college ?>" placeholder="College" required> 
             <!-- <button id='college_enable' onclick="enable('college')">Edit</button>
             <button id='college_disable' onclick="disable('college')" hidden>Confirm</button> -->
         </div>
@@ -142,26 +143,58 @@
             <label>Year of Passing *</label><br><br>
             <input type="text" id="year" name="year" value="<?php echo $year ?>" placeholder="Year of Passing" minlength="4" maxlength="4">
         </div>
-        <br><button class="confirm" value="CONFIRM" data-toggle="modal" data-target="#myModal">CONFIRM</button><br><br>
+        </form>
+        <br><button class="confirm" value="CONFIRM" data-toggle="modal" data-target="#myModal" onclick=" func()">CONFIRM</button><br><br>
 
         <div id="myModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Check Details</h4>
-                    </div>
-                    <div id='details_confirm' class="modal-body">
-                        <script>
-                            if (!document.getElementById('college')) {
-                                var college = "nil";
-                            } else {
-                                var college = document.getElementById('college').value;
+                    </div> 
+                    <script>
+                            function func(){
+                            document.getElementById('namediv').innerHTML="";
+                            document.getElementById('phonediv').innerHTML="";
+                            document.getElementById('collegeiddiv').innerHTML="";
+                            document.getElementById('emaildiv').innerHTML="";
+                            document.getElementById('addressdiv').innerHTML="";
+                            document.getElementById('hometowndiv').innerHTML="";
+                            document.getElementById('collegediv').innerHTML="";
+                            document.getElementById('yeardiv').innerHTML="";
+                            var name = "Name:" + document.getElementById('name').value;
+                            var phone = "Phone:" + document.getElementById('phone').value;
+                            var collegeid = "CollegeId:" + document.getElementById('collegeid').value;
+                            var email = "Email:" + document.getElementById('email').value;
+                            var address = "Address:" + document.getElementById('address').value;
+                            var hometown = "Hometown:" + document.getElementById('hometown').value;
+                            var college = "College:" + document.getElementById('college').value;
+                            var year = "Year of Passing:" + document.getElementById('year').value;
+                            document.getElementById('namediv').appendChild(document.createTextNode(name));
+                            document.getElementById('phonediv').appendChild(document.createTextNode(phone));
+                            document.getElementById('collegeiddiv').appendChild(document.createTextNode(collegeid));
+                            document.getElementById('emaildiv').appendChild(document.createTextNode(email));
+                            document.getElementById('addressdiv').appendChild(document.createTextNode(address));
+                            document.getElementById('hometowndiv').appendChild(document.createTextNode(hometown));
+                            document.getElementById('collegediv').appendChild(document.createTextNode(college));
+                            document.getElementById('yeardiv').appendChild(document.createTextNode(year));
                             }
-
-                            var details = "Name:" + document.getElementById('name').value + "\nCollegeid:" + document.getElementById('collegeid').value + "\nEmail:" + document.getElementById('email').value + "\nPhone:" + document.getElementById('phone').value + "\nCollege:" + college;
-                            document.createTextNode(details)
-                            document.getElementById('details_confirm').appendChild(document.createTextNode(details));
                         </script>
+                    <div id='namediv' class="modal-body">                                           
+                    </div>
+                    <div id="phonediv">
+                    </div>
+                    <div id="collegeiddiv">
+                    </div>
+                    <div id="emaildiv">
+                    </div>
+                    <div id="addressdiv">
+                    </div>
+                    <div id="hometowndiv">
+                    </div>
+                    <div id="collegediv">
+                    </div>
+                    <div id="yeardiv">
                     </div>
                     <div>
                         <button type="button" onclick="post_edited()">CONFIRM</button>
