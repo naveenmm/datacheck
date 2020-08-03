@@ -14,10 +14,11 @@
         </div>
         <?php
         if (isset($_GET['error'])) {
-            echo "<script>alert('" . $_GET['error'] . "')</script>";
+            echo "<script>alert('" . $_GET['error'] . ". Did you choose the correct option in the drop down?')</script>";
         }
         if (isset($_GET['sucess'])) {
             echo "<script>alert('" . $_GET['sucess'] . "')</script>";
+            session_unset();
         }
         ?>
         <form action="edit.php" method="post">
@@ -31,11 +32,11 @@
             </div>-->
             <div>
                 <label>Email</label><br><br>
-                <input type="email" id="email" name="email" placeholder="Email">
+                <input type="email" id="email" name="email" placeholder="Email" required>
             </div>
             <div>
                 <label>Phone number</label><br><br>
-                <input type="text" id="phone" maxlength="10" name="phone" placeholder="Phone">
+                <input type="text" id="phone" maxlength="10" name="phone" placeholder="Phone" required>
             </div>
             <div>
                 <label>Applied For</label><br><br>

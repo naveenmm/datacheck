@@ -10,12 +10,41 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="register.css">
     <script src="edit.js"></script>
+    <style>
+.center{
+  margin: auto;
+  width: 100%;
+  background: #f6f6f6;
+  border: 3px solid #f6f6f6;
+  padding: 0px;
+}
+button{
+  border: 5px;
+    color : white;
+    font-weight: bold;
+    border-style: none;
+    border-radius: 0px;
+    background-color:#00497b;
+    width: 70px;
+    height: 30px;
+}
+.confirm{
+    border: 5px;
+    color : white;
+    font-weight: bold;
+    border-style: none;
+    border-radius: 0px;
+    background-color:#00497b;
+    width: 250px;
+    height: 50px;
+}
+</style>
 </head>
 
 <body>
     <?php
     if (isset($_POST['check'])) {
-        $collegeid = "";
+        //$collegeid = "";
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $applied = $_POST['apply'];
@@ -27,7 +56,7 @@
     echo $_POST['email'];
     include_once "db.php";
     if ($email != null and $phone != null) {
-        //$sql="SELECT * FROM `".$applied."` WHERE email='".$email."' UNION ALL SELECT * FROM `".$applied."` WHERE phone='".$phone."'";
+        
         $sql = "SELECT * FROM `" . $applied . "` WHERE email='" . $email . "' and phone='" . $phone . "'";
         echo $sql;
         if (mysqli_num_rows(mysqli_query($conn, $sql)) < 1) {
@@ -41,11 +70,12 @@
                 $sql = $sqlemail;
                 $_SESSION["mailedit"] = false;
                 $_SESSION["phoneedit"] = true;
-            } elseif (mysqli_num_rows(mysqli_query($conn, $sqlphone)) == mysqli_num_rows(mysqli_query($conn, $sqlemail))) {
-                $sql = $sqlemail;
-                $_SESSION["mailedit"] = false;
-                $_SESSION["phoneedit"] = true;
-            }
+            } 
+             elseif (mysqli_num_rows(mysqli_query($conn, $sqlphone)) == mysqli_num_rows(mysqli_query($conn, $sqlemail))) {
+                 $sql = $sqlemail;
+                 $_SESSION["mailedit"] = false;
+                 $_SESSION["phoneedit"] = true;
+             }
         } else {
             $_SESSION["mailedit"] = false;
             $_SESSION["phoneedit"] = false;
@@ -92,6 +122,7 @@
             <h1>SOTI Campus Recruitment 2021</h1>
             <h3>Online Exam Registration Form</h3>
         </div>
+        <div class="centerdiv">
         <div>
             <label>Candidate Name (In Capitals)*</label><br><br>
             <input type="text" id="name" readonly="true" value="<?php echo $name; ?>" name="name" required placeholder="Name" disabled>
@@ -148,9 +179,9 @@
         </div>
         <div>
             <label>Year of Passing *</label><br><br>
-            <input type="text" id="year" name="year" value="<?php echo $year ?>" disabled placeholder="Year of Passing">
+            <input type="text" id="year" name="year" value="<?php echo $year ?>" disabled placeholder="Year of Passing" minlength="4" maxlength="4">
         </div>
-        <br><button value="CONFIRM" data-toggle="modal" data-target="#myModal">CONFIRM</button><br><br>
+        <br><button class="confirm" value="CONFIRM" data-toggle="modal" data-target="#myModal">CONFIRM</button><br><br>
 
         <div id="myModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -179,7 +210,7 @@
 
             </div>
         </div>
-
+        </div>
     </center>
 </body>
 

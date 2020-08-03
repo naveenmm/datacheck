@@ -1,5 +1,10 @@
 <?php
 function checkIfExists($table,$conn){
+    //need to check both tables
+    //
+    //
+    //
+    //
     $sql_getemail="SELECT email FROM `".$table."` WHERE email='".$_POST['email']."'";
     if(mysqli_num_rows(mysqli_query($conn,$sql_getemail))>0){        
         return true;
