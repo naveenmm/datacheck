@@ -17,16 +17,22 @@
             <h1>SOTI Campus Recruitment 2021</h1>
             <h3>Online Exam Registration Form</h3>
         </div>
-        <form action="" method="post">
+        <?php 
+        if(isset($_GET['error'])){
+            echo "<script>alert('Emails Don't match');</script>";
+            echo "<strong>Emails dont match. Enter details again</strong>";
+        }     
+        ?>
+        <form action="register_check.php" method="post">
             <div>
                 <label>Candidate Name (In Capitals)*</label><br><br>
                 <input type="text" id="name" name="name" required placeholder="Name" value="<?php if(isset($_POST['name'])){echo $_POST['name'];} ?>">
             </div>
             <div>
                 <label>Email *</label><br><br>
-                <input type="email" id="email" name="email" required placeholder="Email" value="<?php if(isset($_POST['email'])){ echo $_POST['email']; }?>">
+                <input type="email" id="email" name="email" required placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value="<?php if(isset($_POST['email'])){ echo $_POST['email']; }?>">
             </div>
-            <div>
+            <div id="maildiv">
                 <label>Re Enter Email (BOTH Emails must match)*</label><br><br>
                 <input type="text" id="mail" name="mail" required placeholder="Email" value="<?php if(isset($_POST['mail'])){ echo $_POST['mail']; }?>">
             </div>
@@ -36,7 +42,7 @@
             </div>
             <div>
                 <label>Phone number *</label><br><br>
-                <input type="text" id="phone" minlength="10" maxlength="10" name="phone" required placeholder="Phone" value="<?php if(isset($_POST['phone'])){ echo $_POST['phone']; }?>">
+                <input type="text" id="phone" minlength="10" maxlength="10" name="phone" required placeholder="Phone" pattern="[0-9]{10}" value="<?php if(isset($_POST['phone'])){ echo $_POST['phone']; }?>">
             </div>
             <div>
                 <label>Candidate Home Town *</label><br><br>
@@ -82,7 +88,7 @@
             </div>
             <div>
                 <label>Year of Passing *</label><br><br>
-                <input type="text" id="pass" name="pass" required placeholder="Year of Passing" maxlength="4" value="<?php if(isset($_POST['pass'])){ echo $_POST['pass']; }?>">
+                <input type="text" id="pass" name="pass" required placeholder="Year of Passing" maxlength="4" minlength="4" value="<?php if(isset($_POST['pass'])){ echo $_POST['pass']; }?>">
             </div>
             <!--<div>
                 <label>Name of the College - Post-Graduated *</label><br><br>
@@ -113,7 +119,8 @@
             <br><input type="submit" value="submit" name="submit">
         </form>
 
-        <?php include "register_check.php";?>
+        <?php include "register_check.php";     
+        ?>
     </center>
     
 </body>

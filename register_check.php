@@ -1,12 +1,9 @@
 <?php
-function checkIfExists($table,$conn){
-    //need to check both tables
-    //
-    //
-    //
-    //
-    $sql_getemail="SELECT email FROM `".$table."` WHERE email='".$_POST['email']."'";
-    if(mysqli_num_rows(mysqli_query($conn,$sql_getemail))>0){        
+include_once "db.php";
+function checkIfExists($conn){
+    $sql_getemail_intern="SELECT email FROM `internship_reg` WHERE email='".$_POST['email']."'";
+    $sql_getemail_fulltime="SELECT email FROM `full_time_reg` WHERE email='".$_POST['email']."'";
+    if(mysqli_num_rows(mysqli_query($conn,$sql_getemail_intern))>0 or mysqli_num_rows(mysqli_query($conn,$sql_getemail_fulltime))>0){        
         return true;
     }
     else{
@@ -14,7 +11,6 @@ function checkIfExists($table,$conn){
         return false;
     }
 }
-
 
 if(isset($_POST['submit'])){
     
@@ -29,7 +25,7 @@ if(isset($_POST['submit'])){
             $verify_table="verified_full_time";
             $table="full_time_reg";
         }
-        if(checkIfExists($table,$conn)==false){
+        if(checkIfExists($conn)==false){
         $sql="INSERT INTO `".$table."`(`Full_Name`,`email`, `phone`, `collegeid`, `address`, `home_town`, `course`, `branch`, `college`, `year_of_passing`) VALUES ('".$_POST['name']."','".$_POST['email']."','".$_POST['phone']."','".$_POST['collegeid']."','".$_POST['address']."','".$_POST['hometown']."','".$_POST['course']."','".$_POST['branch']."','".$_POST['college_name']."','".$_POST['pass']."')";
         $res=mysqli_query($conn,$sql);
         if($res){
@@ -55,6 +51,8 @@ if(isset($_POST['submit'])){
     }
     else{
         echo "<script>alert('Emails Don't match')</script>";
+        echo "<script>location.replace('register.php?error=Emails dont match')</script>";
+        $mail_not_match=true;
     }
     
 }
