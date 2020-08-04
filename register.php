@@ -57,13 +57,23 @@
             </div>
             <div>
                 <label>Name of College *</label><br><br>
-                <input type="text" id="college_name" name="college_name" required placeholder="College" value="<?php if(isset($_POST['college_name'])){ echo $_POST['college_name']; }?>">
+                <input type="text" list="collegelistdata" id="college_name" name="college_name" required placeholder="College" value="<?php if(isset($_POST['college_name'])){ echo $_POST['college_name']; }?>">
+                <datalist id="collegelistdata">
+                    <?php 
+                    include_once "db.php";
+                    $sql="SELECT name FROM `college_list`";
+                    $res=mysqli_query($conn,$sql);
+                    while($row = mysqli_fetch_assoc($res)){
+                        echo "<option value='".$row['name']."'>";
+                    }
+                    ?>
+                </datalist>
             </div>
             <div>
                 <label>College ID *</label><br><br>
                 <input type="text" id="collegeid" name="collegeid" required placeholder="College-ID" value="<?php if(isset($_POST['collegeid'])){ echo $_POST['collegeid']; }?>">
             </div>
-            <!--Graduation Details-->
+            
             <div>
                 <label>Course * <small>(Current Course)</small></label><br><br>
                 <select name="course" id="course" required value="<?php if(isset($_POST['course'])){ echo $_POST['course']; }?>">
@@ -79,11 +89,13 @@
             <div>
                 <label>Branch *</label><br><br>
                 <select name="branch" id="branch" required value="<?php if(isset($_POST['branch'])){ echo $_POST['branch']; }?>">
-                    <option value="Computer Science">Computer Science</option>
-                    <option value="Electronics and Communication">Electronics and Communication</option>
-                    <option value="Information Science">Information Science</option>
-                    <option value="Information Technology">Information Technology</option>
-                    <option value="Others">others</option>
+                <?php 
+                    //include_once "db.php";
+                    $sql="SELECT branch FROM `branchlist`";
+                    $res=mysqli_query($conn,$sql);
+                    while($row = mysqli_fetch_assoc($res)){
+                        echo "<option value='".$row['branch']."'>".$row['branch']."</option>";
+                    }?>
                 </select>
             </div>
             <div>
@@ -95,32 +107,6 @@
             <small>Any comments on the course or branch you selected<small><br><br>
             <textarea rows=3 id="comments" name="comments" placeholder="Comments" maxlength="100" style="width:100%"></textarea>
             </div>
-            <!--<div>
-                <label>Name of the College - Post-Graduated *</label><br><br>
-                <input type="text" id="postgraduationCollege" name="postgraduationCollege" required
-                    placeholder="Post-Graduated College">
-            </div>-->
-            <!-- <div>
-                <label>Name of the College - Post-Graduated *</label><br><br>
-                    <select name="postgraduationCollege" id="postgraduationCollege" required>
-                    <?php
-                    /*$sql="SELECT name FROM college_list";
-                    $res=mysqli_query($conn,$sql);
-                    if($res)
-                    {
-                        while($row=mysqli_fetch_array($res)){
-                            echo "<option value='".$row[0]."'>".$row[0]."</option>";
-                        }
-                    }
-                    else 
-                    {
-                        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-                    }*/
-
-                    ?>   
-                </select>
-            </div> -->
-
             <br><input type="submit" value="SUBMIT" name="submit">
         </form>
 

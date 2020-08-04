@@ -16,7 +16,6 @@
     <?php
     //getting post data from validate.php
     if (isset($_POST['check'])) {
-        //$collegeid = "";
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $applied = $_POST['apply'];
@@ -25,7 +24,6 @@
         $_SESSION["mail"] = $_POST['email'];
         $_SESSION["phone"] = $_POST['phone'];
     }
-    //echo $_POST['email'];
     include_once "db.php";
     //if both email and phone are given
     if ($email != null and $phone != null) {        
@@ -67,12 +65,10 @@
         $sql = '';
         header('Location:validate.php?error=Enter any data');
     }
-    //$sql = "SELECT * FROM `" . $_SESSION["applied"] . "` WHERE email='" . $_POST['email'] . "' LIMIT 1";
     $res = mysqli_query($conn, $sql);
     if (mysqli_num_rows($res) < 1) {
         header('Location:validate.php?error=No data found. Did you choose the correct option in the drop down?');
     }
-    //echo $sql;
     //fetching data if available
     while ($row = mysqli_fetch_assoc($res)) {
         $_SESSION['id'] = $row['id'];
@@ -103,7 +99,7 @@
             <h1>SOTI Campus Recruitment 2021</h1>
             <h3>Online Exam Registration Form</h3>
         </div>
-        <!-- <div class="centerdiv"> -->
+        <div class="centerdiv"> 
             <!-- <form id="editform"> -->
         <div>
             <label>Candidate Name (In Capitals)*</label><br><br>
@@ -122,8 +118,6 @@
         <div>
             <label>College id *</label><br><br>
             <input type="text" id="collegeid" value="<?php echo $collegeid; ?>" name="collegeid" required placeholder="Name">
-            <!-- <button id='collegeid_enable' onclick="enable('collegeid')">Edit</button>
-            <button id='collegeid_disable' onclick="disable('collegeid')" hidden>Confirm</button> -->
         </div>
         <div>
             <label>Address *</label><br><br>
@@ -132,10 +126,7 @@
         <div>
             <label>Candidate Home Town / State *</label><br><br>
             <input type="text" id="hometown" value="<?php echo $hometown ?>" name="hometown" placeholder="Home Town" required>
-            <!-- <button id='hometown_enable' onclick="enable('hometown')">Edit</button>
-            <button id='hometown_disable' onclick="disable('hometown')" hidden>Confirm</button> -->
         </div>
-        <!--Graduation Details-->
         <div>
             <label>Course * <small>(Current Course)</small></label><br><br>            
             <input type="text" id="course" name="course" value="<?php echo $course ?>" disabled placeholder="Course">
@@ -146,9 +137,16 @@
         </div>
         <div>
             <label>Name of the College *</label><br><br>
-            <input type="text" id="college" name="college" value="<?php echo $college ?>" placeholder="College" required> 
-            <!-- <button id='college_enable' onclick="enable('college')">Edit</button>
-            <button id='college_disable' onclick="disable('college')" hidden>Confirm</button> -->
+            <input type="text" list="collegelistdata" id="college" name="college" value="<?php echo $college ?>" placeholder="College" required>
+            <datalist id="collegelistdata">
+                    <?php
+                    $sqlcollegelist="SELECT name FROM `college_list`";
+                    $res=mysqli_query($conn,$sqlcollegelist);
+                    while($row = mysqli_fetch_assoc($res)){
+                        echo "<option value='".$row['name']."'>";
+                    }
+                    ?>
+                </datalist>
         </div>
         <div>
             <label>Year of Passing *</label><br><br>
@@ -159,7 +157,6 @@
             <small><small><br><br>
             <textarea rows=3 id="comments" name="comments" placeholder="Comments" maxlength="100" style="width:100%"></textarea>
             </div>
-
         <!-- </form> -->
         <br><button class="confirm" value="CONFIRM" data-toggle="modal" data-target="#myModal" onclick=" func()">CONFIRM</button><br><br>
 
@@ -244,7 +241,7 @@
 
             </div>
         </div>
-        <!-- </div> -->
+        </div>
     </center>
 </body>
 

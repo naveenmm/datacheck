@@ -9,12 +9,9 @@ $address=$_GET['address'];
 $year=$_GET['year'];
 $name=$_GET['name'];
 $comment=$_GET['comments'];
-if($_SESSION['phone']==""){
-$sql="UPDATE `".$_SESSION["applied"]."` SET `email`='".$mail."', `phone`='".$phone."', `college`='".$college."', `home_town`='".$hometown."',`collegeid`= '".$collegeid."',`Full_Name`='".$name."',`year_of_passing`='".$year."',`address`='".$address."',`comments`='".$comment."' WHERE `email`='".$_SESSION["mail"]."'";
-}
-else{
-    $sql="UPDATE `".$_SESSION["applied"]."` SET `email`='".$mail."', `phone`='".$phone."', `college`='".$college."', `home_town`='".$hometown."',`collegeid`= '".$collegeid."',`Full_Name`='".$name."',`year_of_passing`='".$year."',`address`='".$address."',`comments`='".$comment."' WHERE `phone`='".$_SESSION["phone"]."'";
-}
+
+$sql="UPDATE `".$_SESSION["applied"]."` SET `email`='".$mail."', `phone`='".$phone."', `college`='".$college."', `home_town`='".$hometown."',`collegeid`= '".$collegeid."',`Full_Name`='".$name."',`year_of_passing`='".$year."',`address`='".$address."',`comments`='".$comment."' WHERE `id`='".$_SESSION["id"]."'";
+
  if($_SESSION["applied"]=='full_time_reg')
  {
      $verify_table='verified_full_time';
@@ -26,8 +23,6 @@ else{
  $res=mysqli_query($conn,$sql);
  $verify=mysqli_query($conn,$sql_verify);
  if($res and $verify){
-    //();
-     sleep(3);
      session_unset();
      header('Location:validate.php?sucess='.$sql);
  }
