@@ -61,7 +61,7 @@
     //$sql = "SELECT * FROM `" . $_SESSION["applied"] . "` WHERE email='" . $_POST['email'] . "' LIMIT 1";
     $res = mysqli_query($conn, $sql);
     if (mysqli_num_rows($res) < 1) {
-        header('Location:validate.php?error=No data found');
+        header('Location:validate.php?error=No data found. Did you choose the correct option in the drop down?');
     }
     echo $sql;
     while ($row = mysqli_fetch_assoc($res)) {
@@ -92,7 +92,7 @@
             <h1>SOTI Campus Recruitment 2021</h1>
             <h3>Online Exam Registration Form</h3>
         </div>
-        <div class="centerdiv">
+        <!-- <div class="centerdiv"> -->
             <form method="post" id="editform">
         <div>
             <label>Candidate Name (In Capitals)*</label><br><br>
@@ -197,6 +197,7 @@
                     <div id="yeardiv">
                     </div>
                     <div>
+                    <p style="color:crimson">Data cannot be changed once confirmed. Are you sure?</p>
                         <button type="button" onclick="post_edited()">CONFIRM</button>
                         <button type="button" data-dismiss="modal">CANCEL</button>
                     </div>
@@ -204,7 +205,7 @@
 
             </div>
         </div>
-        </div>
+        <!-- </div> -->
     </center>
 </body>
 

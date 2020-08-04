@@ -10,11 +10,11 @@
     <center>
         <div class="headings">
             <h1>SOTI Campus Recruitment 2021</h1>
-            <h3>Online Exam Registration Form</h3>
+            <h3>DETAILS VALIDATION FORM</h3>
         </div>
         <?php
         if (isset($_GET['error'])) {
-            echo "<script>alert('" . $_GET['error'] . ". Did you choose the correct option in the drop down?')</script>";
+            echo "<script>alert('" . $_GET['error'] . "')</script>";
         }
         if (isset($_GET['sucess'])) {
             echo "<script>alert('" . $_GET['sucess'] . "')</script>";
@@ -47,7 +47,7 @@
             </div>
             <br><input type="submit" name="check" value="SUBMIT">
         </form><br>
-        <a href="register.php">Create New only if no data found</a>
+        <a href="register.php">Create new only if no data found</a>
     </center>
 </body>
 
