@@ -23,6 +23,10 @@ function post_edited() {
     var hometown = document.createElement('input');
     var college = document.createElement('input');
     var year = document.createElement('input');
+    var comments=document.createElement('textarea');
+    comments.type = 'hidden';
+    comments.name = 'comments';
+    comments.value = document.getElementById('comments').value
     name.type = 'hidden';
     name.name = 'name';
     name.value = document.getElementById('name').value;
@@ -61,6 +65,7 @@ function post_edited() {
     form.appendChild(address);
     form.appendChild(year);
     form.appendChild(name);
+    form.appendChild(comments);
     document.body.appendChild(form);
     form.submit();
 }

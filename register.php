@@ -23,7 +23,7 @@
             echo "<strong>Emails dont match. Enter details again</strong>";
         }     
         ?>
-        <form action="register_check.php" method="post">
+        <form action="" method="post">
             <div>
                 <label>Candidate Name (In Capitals)*</label><br><br>
                 <input type="text" id="name" name="name" required placeholder="Name" value="<?php if(isset($_POST['name'])){echo $_POST['name'];} ?>">
@@ -37,27 +37,27 @@
                 <input type="text" id="mail" name="mail" required placeholder="Email" value="<?php if(isset($_POST['mail'])){ echo $_POST['mail']; }?>">
             </div>
             <div>
-                <label>Address (In Capitals)*</label><br><br>
+                <label>Address *</label><br><br>
                 <input type="text" id="address" name="address" required placeholder="Address" maxlength="358" value="<?php if(isset($_POST['address'])){ echo $_POST['address'];} ?>">
             </div>
             <div>
-                <label>Phone number *</label><br><br>
+                <label>Mobile Number * <small>(Enter valid Indian 10 digit Mobile number</small></label><br><br>
                 <input type="text" id="phone" minlength="10" maxlength="10" name="phone" required placeholder="Phone" pattern="[0-9]{10}" value="<?php if(isset($_POST['phone'])){ echo $_POST['phone']; }?>">
             </div>
             <div>
-                <label>Candidate Home Town *</label><br><br>
+                <label>Candidate Home Town / State *</label><br><br>
                 <input type="text" id="hometown" name="hometown" required placeholder="Home Town" value="<?php if(isset($_POST['hometown'])){ echo $_POST['hometown'];} ?>">
             </div>
             <div>
                 <label>Interested to apply for *</label><br><br>
                 <select name="apply" id="apply" required value="<?php if(isset($_POST['apply'])){ echo $_POST['apply'];}?>">
-                    <option value="INTERNSHIP">FULL TIME INTERNSHIP(6 Months)</option>
+                    <option value="internship">FULL TIME INTERNSHIP(6 Months)</option>
                     <option value="FULL TIME DEVELOPER">FULL TIME DEVELOPER</option>
                 </select>
             </div>
             <div>
                 <label>Name of College *</label><br><br>
-                <input type="text" id="college_name" name="college_name" required placeholder="Graduated College" value="<?php if(isset($_POST['college_name'])){ echo $_POST['college_name']; }?>">
+                <input type="text" id="college_name" name="college_name" required placeholder="College" value="<?php if(isset($_POST['college_name'])){ echo $_POST['college_name']; }?>">
             </div>
             <div>
                 <label>College ID *</label><br><br>
@@ -65,7 +65,7 @@
             </div>
             <!--Graduation Details-->
             <div>
-                <label>Course(Current)*</label><br><br>
+                <label>Course * <small>(Current Course)</small></label><br><br>
                 <select name="course" id="course" required value="<?php if(isset($_POST['course'])){ echo $_POST['course']; }?>">
                     <option value="B.Tech/BE">B.Tech/BE</option>
                     <option value="BCA">BCA</option>
@@ -77,7 +77,7 @@
                 </select>
             </div>
             <div>
-                <label>Graduation Branch *</label><br><br>
+                <label>Branch *</label><br><br>
                 <select name="branch" id="branch" required value="<?php if(isset($_POST['branch'])){ echo $_POST['branch']; }?>">
                     <option value="Computer Science">Computer Science</option>
                     <option value="Electronics and Communication">Electronics and Communication</option>
@@ -89,6 +89,11 @@
             <div>
                 <label>Year of Passing *</label><br><br>
                 <input type="text" id="pass" name="pass" required placeholder="Year of Passing" maxlength="4" minlength="4" value="<?php if(isset($_POST['pass'])){ echo $_POST['pass']; }?>">
+            </div>
+            <div>
+            <label>Comments</label><br>
+            <small>Any comments on the course or branch you selected<small><br><br>
+            <textarea rows=3 id="comments" name="comments" placeholder="Comments" maxlength="100" style="width:100%"></textarea>
             </div>
             <!--<div>
                 <label>Name of the College - Post-Graduated *</label><br><br>

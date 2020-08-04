@@ -25,32 +25,29 @@
         $_SESSION["mail"] = $_POST['email'];
         $_SESSION["phone"] = $_POST['phone'];
     }
-    //echo $_POST['email'];
+    echo $_POST['email'];
     include_once "db.php";
     //if both email and phone are given
     if ($email != null and $phone != null) {        
         $sql = "SELECT * FROM `" . $applied . "` WHERE email='" . $email . "' and phone='" . $phone . "'";
-        //echo $sql;
+        echo $sql;
         if (mysqli_num_rows(mysqli_query($conn, $sql)) < 1) {
             $sqlemail = "SELECT * FROM `" . $applied . "` WHERE email='" . $email . "'";
             $sqlphone = "SELECT * FROM `" . $applied . "` WHERE phone='" . $phone . "'";
             //if email data is only available
             if (mysqli_num_rows(mysqli_query($conn, $sqlemail)) < mysqli_num_rows(mysqli_query($conn, $sqlphone))) {
                 $sql = $sqlphone;
-                $_SESSION["mail"]="";
                 $_SESSION["phoneedit"] = false;
                 $_SESSION["mailedit"] = true;
             } 
             //if phone data is available
             elseif (mysqli_num_rows(mysqli_query($conn, $sqlphone)) < mysqli_num_rows(mysqli_query($conn, $sqlemail))) {
                 $sql = $sqlemail;
-                $_SESSION["phone"]="";
                 $_SESSION["mailedit"] = false;
                 $_SESSION["phoneedit"] = true;
             }             
              elseif (mysqli_num_rows(mysqli_query($conn, $sqlphone)) == mysqli_num_rows(mysqli_query($conn, $sqlemail))) {
                  $sql = $sqlemail;
-                 $_SESSION["phone"]="";
                  $_SESSION["mailedit"] = false;
                  $_SESSION["phoneedit"] = true;
              }
@@ -72,7 +69,7 @@
     if (mysqli_num_rows($res) < 1) {
         header('Location:validate.php?error=No data found. Did you choose the correct option in the drop down?');
     }
-    //echo $sql;
+    echo $sql;
     //fetching data if available
     while ($row = mysqli_fetch_assoc($res)) {
         $_SESSION['id'] = $row['id'];
@@ -94,7 +91,7 @@
         $verify_sql = "SELECT * FROM `" . $verify_table . "` WHERE id='" . $_SESSION['id'] . "'";
         //checking if already verified
         if (mysqli_num_rows(mysqli_query($conn, $verify_sql)) > 0) {
-            header('Location:validate.php?error=You have already Verified data. Any queries contact your college placement officer');
+            header('Location:validate.php?error=You have already Verified data. Contact admin for details');
         }
     }
     ?>
@@ -104,7 +101,7 @@
             <h3>Online Exam Registration Form</h3>
         </div>
         <!-- <div class="centerdiv"> -->
-            <!-- <form id="editform"> -->
+            <form action="update.php" method="get" id="editform">
         <div>
             <label>Candidate Name (In Capitals)*</label><br><br>
             <input type="text" id="name" value="<?php echo $name; ?>" name="name" required placeholder="Name">
@@ -116,7 +113,7 @@
             <input type="email" id="email" value="<?php echo $email; ?>" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required placeholder="Email" <?php if ($_SESSION["mailedit"] == false){echo "disabled";}?>>
         </div>
         <div>
-            <label>Mobile Number * <small>(Enter valid Indian 10 digit Phone number)</small></label><br><br>
+            <label>Phone number *</label><br><br>
             <input type="text" id="phone" maxlength="10" minlength="10" pattern="[0-9]{10}" value="<?php echo $phone; ?>" name="phone" required placeholder="Phone" <?php if ($_SESSION["phoneedit"] == false){echo "disabled";}?>>
         </div>
         <div>
@@ -126,18 +123,18 @@
             <button id='collegeid_disable' onclick="disable('collegeid')" hidden>Confirm</button> -->
         </div>
         <div>
-            <label>Address *</label><br><br>
+            <label>Address (In Capitals)*</label><br><br>
             <input type="text" id="address" value="<?php echo $address ?>" multiple name="address" placeholder="Address" required>
         </div>
         <div>
-            <label>Candidate Home Town / State *</label><br><br>
+            <label>Candidate Home Town *</label><br><br>
             <input type="text" id="hometown" value="<?php echo $hometown ?>" name="hometown" placeholder="Home Town" required>
             <!-- <button id='hometown_enable' onclick="enable('hometown')">Edit</button>
             <button id='hometown_disable' onclick="disable('hometown')" hidden>Confirm</button> -->
         </div>
         <!--Graduation Details-->
         <div>
-            <label>Course * <small>(Current Course)</small></label><br><br>            
+            <label>Course *</label><br><br>
             <input type="text" id="course" name="course" value="<?php echo $course ?>" disabled placeholder="Course">
         </div>
         <div>
@@ -154,13 +151,7 @@
             <label>Year of Passing *</label><br><br>
             <input type="text" id="year" name="year" value="<?php echo $year ?>" placeholder="Year of Passing" minlength="4" maxlength="4" required>
         </div>
-        <div>
-            <label>Comments</label>
-            <small><small><br><br>
-            <textarea rows=3 id="comments" name="comments" placeholder="Comments" maxlength="100" style="width:100%"></textarea>
-            </div>
-
-        <!-- </form> -->
+        </form>
         <br><button class="confirm" value="CONFIRM" data-toggle="modal" data-target="#myModal" onclick=" func()">CONFIRM</button><br><br>
 
         <div id="myModal" class="modal fade" role="dialog">

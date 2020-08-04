@@ -18,7 +18,7 @@
         }
         if (isset($_GET['sucess'])) {
             echo "<script>alert('" . $_GET['sucess'] . "')</script>";
-            session_unset();
+            //session_unset();
         }
         ?>
         <form action="edit.php" method="post">
@@ -36,7 +36,7 @@
             </div>
             <div>
                 <label>Phone number</label><br><br>
-                <input type="text" id="phone" maxlength="10" name="phone" placeholder="Phone" required>
+                <input type="text" id="phone" maxlength="10" name="phone" placeholder="Mobile" required>
             </div>
             <div>
                 <label>Applied For</label><br><br>
@@ -45,9 +45,9 @@
                     <option value="full_time_reg">FULL TIME DEVELOPER(Fresher Hiring)</option>
                 </select>
             </div>
-            <br><input type="submit" name="check" value="SUBMIT">
+            <br><input type="submit" name="check" value="SUBMIT">&nbsp;<a href="register.php">Register only if no data found</a>
         </form><br>
-        <a href="register.php">Create new only if no data found</a>
+        
     </center>
 </body>
 
