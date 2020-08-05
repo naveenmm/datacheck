@@ -42,7 +42,7 @@
             </div>
             <div>
                 <label>Mobile Number * <small>(Enter valid Indian 10 digit Mobile number</small></label><br><br>
-                <input type="text" id="phone" minlength="10" maxlength="10" name="phone" required placeholder="Phone" pattern="[0-9]{10}" value="<?php if(isset($_POST['phone'])){ echo $_POST['phone']; }?>">
+                <input type="text" id="phone" minlength="10" maxlength="10" name="phone" required placeholder="Phone" title="Enter a valid 10 digit phone number" pattern="[0-9]{10}" value="<?php if(isset($_POST['phone'])){ echo $_POST['phone']; }?>">
             </div>
             <div>
                 <label>Candidate Home Town / State *</label><br><br>
@@ -51,8 +51,8 @@
             <div>
                 <label>Interested to apply for *</label><br><br>
                 <select name="apply" id="apply" required value="<?php if(isset($_POST['apply'])){ echo $_POST['apply'];}?>">
-                    <option value="internship">FULL TIME INTERNSHIP(6 Months)</option>
-                    <option value="FULL TIME DEVELOPER">FULL TIME DEVELOPER</option>
+                    <option value="Intern">FULL TIME INTERNSHIP(6 Months)</option>
+                    <option value="Fresher">FULL TIME DEVELOPER</option>
                 </select>
             </div>
             <div>
@@ -100,7 +100,7 @@
             </div>
             <div>
                 <label>Year of Passing *</label><br><br>
-                <input type="text" id="pass" name="pass" required placeholder="Year of Passing" maxlength="4" minlength="4" value="<?php if(isset($_POST['pass'])){ echo $_POST['pass']; }?>">
+                <input type="text" id="pass" name="pass" pattern="[0-9]{4}" title="Enter a valid year of passing" required placeholder="Year of Passing" maxlength="4" minlength="4" value="<?php if(isset($_POST['pass'])){ echo $_POST['pass']; }?>">
             </div>
             <div>
             <label>Comments</label><br>

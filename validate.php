@@ -27,14 +27,7 @@
             </div>
             <div>
                 <label>Phone number</label><br><br>
-                <input type="text" id="phone" maxlength="10" name="phone" placeholder="Mobile" required>
-            </div>
-            <div>
-                <label>Applied For</label><br><br>
-                <select name="apply" id="apply">
-                    <option value="internship_reg">FULL TIME INTERNSHIP(6 Months)</option>
-                    <option value="full_time_reg">FULL TIME DEVELOPER(Fresher Hiring)</option>
-                </select>
+                <input type="text" id="phone" pattern="[0-9]{10}" maxlength="10" name="phone" placeholder="Mobile" required title="Enter a valid 10 digit phone number">
             </div>
             <br><input type="submit" name="check" value="SUBMIT">&nbsp;&nbsp;<a href="register.php">Register only if no data found</a>
         </form><br>

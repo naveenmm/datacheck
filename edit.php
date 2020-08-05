@@ -18,20 +18,18 @@
     if (isset($_POST['check'])) {
         $email = $_POST['email'];
         $phone = $_POST['phone'];
-        $applied = $_POST['apply'];
         session_start();//setting sessions for updating in the end
-        $_SESSION["applied"] = $applied;
         $_SESSION["mail"] = $_POST['email'];
         $_SESSION["phone"] = $_POST['phone'];
     }
     include_once "db.php";
     //if both email and phone are given
     if ($email != null and $phone != null) {        
-        $sql = "SELECT * FROM `" . $applied . "` WHERE email='" . $email . "' and phone='" . $phone . "'";
+        $sql = "SELECT * FROM `registration` WHERE email='" . $email . "' and phone='" . $phone . "'";
         //echo $sql;
         if (mysqli_num_rows(mysqli_query($conn, $sql)) < 1) {
-            $sqlemail = "SELECT * FROM `" . $applied . "` WHERE email='" . $email . "'";
-            $sqlphone = "SELECT * FROM `" . $applied . "` WHERE phone='" . $phone . "'";
+            $sqlemail = "SELECT * FROM `registration` WHERE email='" . $email . "'";
+            $sqlphone = "SELECT * FROM `registration` WHERE phone='" . $phone . "'";
             //if email data is only available
             if (mysqli_num_rows(mysqli_query($conn, $sqlemail)) < mysqli_num_rows(mysqli_query($conn, $sqlphone))) {
                 $sql = $sqlphone;
@@ -58,9 +56,9 @@
             $_SESSION["phoneedit"] = false;
         }
     } elseif ($email == null and $phone != null) {
-        $sql = "SELECT * FROM `" . $applied . "` WHERE phone='" . $phone . "'";
+        $sql = "SELECT * FROM `registration` WHERE phone='" . $phone . "'";
     } elseif ($email != null and $phone == null) {
-        $sql = "SELECT * FROM `" . $applied . "` WHERE email='" . $email . "'";
+        $sql = "SELECT * FROM `registration` WHERE email='" . $email . "'";
     } elseif ($email == null and $phone == null) {
         $sql = '';
         header('Location:validate.php?error=Enter any data');
@@ -81,13 +79,11 @@
         $course = $row['course'];
         $branch = $row['branch'];
         $college = $row['college'];
+        $district=$row['district'];
         $year = $row['year_of_passing'];
-        if ($_SESSION['applied'] == 'internship_reg') {
-            $verify_table = "verified_interns";
-        } elseif ($_SESSION['applied'] == 'full_time_reg') {
-            $verify_table = "verified_full_time";
-        }
-        $verify_sql = "SELECT * FROM `" . $verify_table . "` WHERE id='" . $_SESSION['id'] . "'";
+        $applied = $row['year_of_passing'];
+        
+        $verify_sql = "SELECT * FROM `verified` WHERE id='" . $_SESSION['id'] . "'";
         //checking if already verified
         if (mysqli_num_rows(mysqli_query($conn, $verify_sql)) > 0) {
             header('Location:validate.php?error=You have already Verified data. Any queries contact your college placement officer');
@@ -176,14 +172,14 @@
                             document.getElementById('hometowndiv').innerHTML="";
                             document.getElementById('collegediv').innerHTML="";
                             document.getElementById('yeardiv').innerHTML="";
-                            var name = "Name:" + document.getElementById('name').value;
-                            var phone = "Phone:" + document.getElementById('phone').value;
-                            var collegeid = "CollegeId:" + document.getElementById('collegeid').value;
-                            var email = "Email:" + document.getElementById('email').value;
-                            var address = "Address:" + document.getElementById('address').value;
-                            var hometown = "Hometown:" + document.getElementById('hometown').value;
-                            var college = "College:" + document.getElementById('college').value;
-                            var year = "Year of Passing:" + document.getElementById('year').value;
+                            var name = "Name : " + document.getElementById('name').value;
+                            var phone = "Phone : " + document.getElementById('phone').value;
+                            var collegeid = "CollegeId : " + document.getElementById('collegeid').value;
+                            var email = "Email : " + document.getElementById('email').value;
+                            var address = "Address : " + document.getElementById('address').value;
+                            var hometown = "Hometown : " + document.getElementById('hometown').value;
+                            var college = "College : " + document.getElementById('college').value;
+                            var year = "Year of Passing : " + document.getElementById('year').value;
                             document.getElementById('namediv').appendChild(document.createTextNode(name));
                             document.getElementById('phonediv').appendChild(document.createTextNode(phone));
                             document.getElementById('collegeiddiv').appendChild(document.createTextNode(collegeid));
@@ -192,8 +188,8 @@
                             document.getElementById('hometowndiv').appendChild(document.createTextNode(hometown));
                             document.getElementById('collegediv').appendChild(document.createTextNode(college));
                             document.getElementById('yeardiv').appendChild(document.createTextNode(year));
-                            if(document.getElementById('name').value=="" || document.getElementById('phone').value=="" || document.getElementById('collegeid').value=="" || document.getElementById('email').value=="" || document.getElementById('address').value=="" || document.getElementById('hometown').value=="" || document.getElementById('college').value=="" || document.getElementById('year').value=="" || document.getElementById('phone').value.length!=10 ||document.getElementById('year').value.length!=4){
-                                if(document.getElementById('phone').value.length!=10 ||document.getElementById('year').value.length!=4){
+                            if(document.getElementById('name').value=="" || document.getElementById('phone').value=="" || document.getElementById('collegeid').value=="" || document.getElementById('email').value=="" || document.getElementById('address').value=="" || document.getElementById('hometown').value=="" || document.getElementById('college').value=="" || document.getElementById('year').value=="" || document.getElementById('phone').value.length!=10 ||document.getElementById('year').value.length!=4 || isNaN(document.getElementById('year').value)==true || isNaN(document.getElementById('phone').value)== true){
+                                if(document.getElementById('phone').value.length!=10 ||document.getElementById('year').value.length!=4 || isNaN(document.getElementById('year').value)==true || isNaN(document.getElementById('phone').value)== true){
                                     document.getElementById("posteditbtn").style.visibility='hidden';
                                     document.getElementById("errordiv").innerHTML="Check phone number(10 digit) and year of passing";
                                 }                                   
