@@ -27,7 +27,7 @@
             </div>
             <div>
                 <label>Phone number</label><br><br>
-                <input type="text" id="phone" pattern="[0-9]{10}" maxlength="10" name="phone" placeholder="Mobile" required title="Enter a valid 10 digit phone number">
+                <input type="text" id="phone" pattern="[0-9]{10}" name="phone" placeholder="Mobile" required title="Enter a valid 10 digit phone number">
             </div>
             <br><input type="submit" name="check" value="SUBMIT">&nbsp;&nbsp;<a href="register.php">Register only if no data found</a>
         </form><br>
