@@ -10,7 +10,7 @@
     <center>
         <div class="headings">
             <h1>SOTI Campus Recruitment 2021</h1>
-            <h3>DETAILS VALIDATION FORM</h3>
+            <h3>DATA VALIDATION AND REGISTRATION FORM</h3>
         </div>
         <?php
         if (isset($_GET['error'])) {
@@ -20,7 +20,8 @@
             echo "<script>alert('" . $_GET['sucess'] . "')</script>";
         }
         ?>
-        <form action="edit.php" method="post">
+        <p>Please enter your email-id and phone to validate</p>
+        <form action="edit.php" method="post">            
             <div>
                 <label>Email</label><br><br>
                 <input type="email" id="email" name="email" placeholder="Email" required>
@@ -29,7 +30,7 @@
                 <label>Phone number</label><br><br>
                 <input type="text" id="phone" pattern="[0-9]{10}" name="phone" placeholder="Mobile" required title="Enter a valid 10 digit phone number">
             </div>
-            <br><input type="submit" name="check" value="SUBMIT">&nbsp;&nbsp;<a href="register.php">Register only if no data found</a>
+            <br><input type="submit" name="check" value="VALIDATE">&nbsp;&nbsp;<a style="color:crimson" href="register.php">New Registration</a>
         </form><br>
         
     </center>

@@ -104,11 +104,11 @@
             <button id='name_disable' onclick="disable('name')" hidden>Confirm</button> -->
         </div>
         <div>
-            <label>Email *</label><br><br>
+            <label>Email *</label><br><br><?php if ($_SESSION["mailedit"] == true){echo "Please Check Your Email id";}?>
             <input type="email" id="email" value="<?php echo $email; ?>" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required placeholder="Email" <?php if ($_SESSION["mailedit"] == false){echo "disabled";}?>>
         </div>
-        <div>
-            <label>Mobile Number * <small>(Enter valid Indian 10 digit Phone number)</small></label><br><br>
+        <div>        
+            <label>Mobile Number * <small>(Enter valid Indian 10 digit Phone number)</small></label><br><br><?php if ($_SESSION["phoneedit"] == true){echo "Please Check Your Phone Number";}?>
             <input type="text" id="phone" maxlength="10" minlength="10" pattern="[0-9]{10}" value="<?php echo $phone; ?>" name="phone" required placeholder="Phone" <?php if ($_SESSION["phoneedit"] == false){echo "disabled";}?>>
         </div>
         <div>

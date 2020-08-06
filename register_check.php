@@ -28,7 +28,7 @@ if(isset($_POST['submit'])){
             }
         }
         else{            
-            echo "<script>location.replace('validate.php?error=You have already registered')</script>";
+            echo "<script>location.replace('validate.php?error=You have already registered. Please Validate')</script>";
         }
     }
     else
