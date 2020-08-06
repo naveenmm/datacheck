@@ -20,7 +20,7 @@
         <?php 
         if(isset($_GET['error'])){
             echo "<script>alert('Emails Don't match');</script>";
-            echo "<strong>Emails dont match. Enter details again</strong>";
+            echo "<strong style='color:red'>Emails dont match. Enter details again</strong>";
         }     
         ?>
         <form action="" method="post">
