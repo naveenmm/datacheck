@@ -65,7 +65,7 @@
     }
     $res = mysqli_query($conn, $sql);
     if (mysqli_num_rows($res) < 1) {
-        header('Location:validate.php?error=No data found. Did you choose the correct option in the drop down?');
+        header('Location:validate.php?error=No data found. Check credentials');
     }
     //fetching data if available
     while ($row = mysqli_fetch_assoc($res)) {
