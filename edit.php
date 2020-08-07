@@ -125,11 +125,28 @@
         </div>
         <div>
             <label>Course * <small>(Current Course)</small></label><br><br>            
-            <input type="text" id="course" name="course" value="<?php echo $course ?>" disabled placeholder="Course">
+            <input type="text" list="course_list" id="course" name="course" value="<?php echo $course ?>" placeholder="Course">
+            <datalist id="course_list">
+                <option value="B.Tech/BE">
+                    <option value="BCA">
+                    <option value="BSc">
+                    <option value="M.Tech">
+                    <option value="MCA">
+                    <option value="MSc">
+                    <option value="Others">
+            </datalist>
         </div>
         <div>
             <label>Branch *</label><br><br>
-            <input type="text" id="branch" name="branch" value="<?php echo $branch ?>" disabled placeholder="Branch">
+            <input type="text" list="branch_list" id="branch" name="branch" value="<?php echo $branch ?>" placeholder="Branch">
+            <datalist id="branch_list">
+                <?php
+                $sql="SELECT branch FROM `branchlist`";
+                    $res=mysqli_query($conn,$sql);
+                    while($row = mysqli_fetch_assoc($res)){
+                        echo "<option value=\"".$row['branch']."\">";
+                    }?>
+            </datalist>
         </div>
         <div>
             <label>Name of the College *</label><br><br>
@@ -172,6 +189,8 @@
                             document.getElementById('hometowndiv').innerHTML="";
                             document.getElementById('collegediv').innerHTML="";
                             document.getElementById('yeardiv').innerHTML="";
+                            document.getElementById('course_div').innerHTML="";
+                            document.getElementById('branch_div').innerHTML="";
                             var name = "Name : " + document.getElementById('name').value;
                             var phone = "Phone : " + document.getElementById('phone').value;
                             var collegeid = "CollegeId : " + document.getElementById('collegeid').value;
@@ -180,6 +199,8 @@
                             var hometown = "Hometown : " + document.getElementById('hometown').value;
                             var college = "College : " + document.getElementById('college').value;
                             var year = "Year of Passing : " + document.getElementById('year').value;
+                            var course = "Course : " + document.getElementById('course').value;
+                            var branch = "Branch : " + document.getElementById('branch').value;
                             document.getElementById('namediv').appendChild(document.createTextNode(name));
                             document.getElementById('phonediv').appendChild(document.createTextNode(phone));
                             document.getElementById('collegeiddiv').appendChild(document.createTextNode(collegeid));
@@ -188,7 +209,9 @@
                             document.getElementById('hometowndiv').appendChild(document.createTextNode(hometown));
                             document.getElementById('collegediv').appendChild(document.createTextNode(college));
                             document.getElementById('yeardiv').appendChild(document.createTextNode(year));
-                            if(document.getElementById('name').value=="" || document.getElementById('phone').value=="" || document.getElementById('collegeid').value=="" || document.getElementById('email').value=="" || document.getElementById('address').value=="" || document.getElementById('hometown').value=="" || document.getElementById('college').value=="" || document.getElementById('year').value=="" || document.getElementById('phone').value.length!=10 ||document.getElementById('year').value.length!=4 || isNaN(document.getElementById('year').value)==true || isNaN(document.getElementById('phone').value)== true){
+                            document.getElementById('course_div').appendChild(document.createTextNode(course));
+                            document.getElementById('branch_div').appendChild(document.createTextNode(branch));
+                            if(document.getElementById('name').value=="" || document.getElementById('phone').value=="" || document.getElementById('collegeid').value=="" || document.getElementById('email').value=="" || document.getElementById('address').value=="" || document.getElementById('hometown').value=="" || document.getElementById('college').value=="" || document.getElementById('year').value=="" || document.getElementById('phone').value.length!=10 ||document.getElementById('year').value.length!=4 || isNaN(document.getElementById('year').value)==true || isNaN(document.getElementById('phone').value)== true || document.getElementById('course').value=="" || document.getElementById('branch').value==""){
                                 if(document.getElementById('phone').value.length!=10 ||document.getElementById('year').value.length!=4 || isNaN(document.getElementById('year').value)==true || isNaN(document.getElementById('phone').value)== true){
                                     document.getElementById("posteditbtn").style.visibility='hidden';
                                     document.getElementById("errordiv").innerHTML="Check phone number(10 digit) and year of passing";
@@ -225,8 +248,12 @@
                     </div>
                     <div id="collegediv">
                     </div>
-                    <div id="yeardiv">
+                    <div id="course_div">
                     </div>
+                    <div id="branch_div">
+                    </div>
+                    <div id="yeardiv">
+                    </div>                    
                     <div>
                         <p style="color:crimson" id="errordiv"></p>
                     <p style="color:crimson">Data cannot be changed once confirmed. Are you sure?</p>

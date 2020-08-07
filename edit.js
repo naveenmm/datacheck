@@ -24,6 +24,9 @@ function post_edited() {
     var college = document.createElement('input');
     var year = document.createElement('input');
     var comments=document.createElement('textarea');
+    var course=document.createElement('input');
+    var branch=document.createElement('input');
+
     comments.type = 'hidden';
     comments.name = 'comments';
     comments.value = document.getElementById('comments').value
@@ -51,12 +54,19 @@ function post_edited() {
     year.type = 'hidden';
     year.name = 'year';
     year.value = document.getElementById('year').value;
+    course.type = 'hidden';
+    course.name = 'course';
+    course.value = document.getElementById('course').value
+    branch.type = 'hidden';
+    branch.name = 'branch';
+    branch.value = document.getElementById('branch').value
+    console.log(branch);
     /*if (document.getElementById('college')) {
         college.value = document.getElementById('college').value;
     }
     else {
         college.value = "";
-    }*/
+    }*/    
     form.appendChild(mail);
     form.appendChild(phone);
     form.appendChild(college);
@@ -66,6 +76,8 @@ function post_edited() {
     form.appendChild(year);
     form.appendChild(name);
     form.appendChild(comments);
+    form.appendChild(branch);
+    form.appendChild(course);
     document.body.appendChild(form);
     form.submit();
 }
