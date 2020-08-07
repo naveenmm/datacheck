@@ -31,9 +31,8 @@
                 <input type="text" id="phone" pattern="[0-9]{10}" name="phone" placeholder="Mobile" required title="Enter a valid 10 digit phone number">
             </div>
             <br><input type="submit" name="check" value="VALIDATE">&nbsp;&nbsp;<a style="color:crimson" href="register.php">New Registration</a><br>
-            <a target="_blank" href="Recruitment Drive Instructions.pdf">View/Download the Recruitment Drive Instructions</a>
-        </form><br>
-        
+            <a target="_blank" href="Recruitment_Drive_Instructions.pdf">Recruitment Drive Instructions</a>
+        </form><br>        
     </center>
 </body>
 
