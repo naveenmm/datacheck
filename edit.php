@@ -139,7 +139,7 @@
                     $sqlcollegelist="SELECT name FROM `college_list`";
                     $res=mysqli_query($conn,$sqlcollegelist);
                     while($row = mysqli_fetch_assoc($res)){
-                        echo "<option value='".$row['name']."'>";
+                        echo "<option value=\"".$row['name']."\">";
                     }
                     ?>
                 </datalist>

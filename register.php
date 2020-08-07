@@ -64,7 +64,7 @@
                     $sql="SELECT name FROM `college_list`";
                     $res=mysqli_query($conn,$sql);
                     while($row = mysqli_fetch_assoc($res)){
-                        echo "<option value='".$row['name']."'>";
+                        echo "<option value=\"".$row['name']."\">";
                     }
                     ?>
                 </datalist>
@@ -94,7 +94,7 @@
                     $sql="SELECT branch FROM `branchlist`";
                     $res=mysqli_query($conn,$sql);
                     while($row = mysqli_fetch_assoc($res)){
-                        echo "<option value='".$row['branch']."'>".$row['branch']."</option>";
+                        echo "<option value=\"".$row['branch']."\">".$row['branch']."</option>";
                     }?>
                 </select>
             </div>
