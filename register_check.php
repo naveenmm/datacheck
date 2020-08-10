@@ -1,5 +1,6 @@
 <?php
 include_once "db.php";
+header("Location: timeout.php");
 function checkIfExists($conn){
     $sql_getemail="SELECT email FROM `registration` WHERE email='".$_POST['email']."'";
     if(mysqli_num_rows(mysqli_query($conn,$sql_getemail))>0){        

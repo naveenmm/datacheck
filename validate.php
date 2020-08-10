@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOTI Registration</title>
     <link rel="stylesheet" type="text/css" href="register.css">
+    <?php header("Location: timeout.php"); ?>
 </head>
 <body>
     <center>

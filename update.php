@@ -1,4 +1,5 @@
 <?php include_once "db.php";
+header("Location: timeout.php");
 session_start();
 $phone=$_GET['phone'];
 $mail=$_GET['mail'];
